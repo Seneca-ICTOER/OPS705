@@ -52,7 +52,7 @@ sudo yum install tree
 (Image:path-name.png - A pathname points to a file system location by **following the directory tree hierarchy**.)
 
 > A **pathname** is used to specify a **route to a file** within the file system.
->
+>![Image: Linux - Pathnames](/img/linux-pathname.png)
 > A pathname **points** to a file system location by **following the directory tree hierarchy** expressed in a string of characters in which path components, separated by a delimiting character, represent each directory. The **delimiting character** is most commonly the slash ("**/**").
 >
 > (Reference: [Wikipedia](https://en.wikipedia.org/wiki/Path_(computing)))
