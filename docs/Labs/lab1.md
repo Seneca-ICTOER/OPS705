@@ -159,11 +159,17 @@ ls -lh ~/bin
 ### Part 4: Adding Your Professor's Public Key
 In this section, you will add your professor's public key to allow them to log in to your Linux VM and run lab checks and perform troubleshooting when needed.
 
-1. On Blackboard, find your professor's public key in *Course Documents* and copy the text from inside the file.
-1. Using the following command as your **regular user**, install your professor's public key on to your Linux VM (substitute *professorID* for the actual public key text): 
+1. As part of the files you downloaded with git, you should have a file here: `~/bin/professorID.pub`
+1. Using the following command as your **regular user**, install your professor's public key on to your Linux VM: 
 ```bash
-echo "professorID" >> ~/.ssh/authorized_keys
+cat ~/bin/professorID.pub >> ~/.ssh/authorized_keys
 ```
+1. Verify the key installation was successful by running the following:
+```bash
+cat ~/bin/professorID.pub; cat ~/.ssh/authorized_keys
+```
+
+Compare the output. You should see the contents of **professorID.pub** in your **authorized_keys** file. (*WARNING: Do not delete any additional data in authorized_keys!*)
 
 ### Part 5: Fully Stopping your CentOS VM
 As with the Windows Server VM, fully deallocating your VM is essential to responsible usage.
@@ -224,4 +230,4 @@ Submit to Blackboard full-desktop screenshots (PNG/JPG) of the following:
 1. Your CentOS remote SSH session after running the command: `hostnamectl`
 1. The list of lab files downloaded to your CentOS VM.
 
-Make sure to fully stop your VMs when you're done!
+**Reminder:** Make sure to fully stop your VMs when you're done!
