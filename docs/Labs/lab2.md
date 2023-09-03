@@ -1,3 +1,10 @@
+---
+id: lab2
+title: Lab 2
+sidebar_position: 2
+description: Lab 2 - Securing Your Virtual Machines
+---
+
 # Lab 2: Securing Your Virtual Machines
 
 ## Lab Preparation
