@@ -71,6 +71,9 @@ In this section, we'll discover how to remotely connect to the Windows Server's 
 1. In the *Overview* tab for the Virtual Machine created in Part 1, click the **Connect** button. This will download an RDP profile file (usually *vmname.rdp*).
 1. Open the RDP file. It should launch the Remote Desktop application and automatically try to connect to your VM.
 1. Upon opening, the VM's URL, port number, and username are automatically provided.
+
+![Image: Windows RDP Dialog](/img/azure-rdp.png)
+
 1. Type the password you used when creating the VM in Part 1.
 1. Accept the certificate warning. (Click yes.)
 1. You should see a login progress screen, and a Windows Server desktop after a few moments.
@@ -88,6 +91,7 @@ This section is fairly simple. The one thing to never forget: Ensure your VM's s
 1. A notification will appear in the top right of your browser window, confirming your action.
 1. Don't worry about going into the Windows OS and shutting down first. Azure sends a signal to the VM to shut down safely.
 1. If your VM status says stopped, but does not include the **(Deallocated)** text, then resources are still being held by the VM and we're still being charged. The stop button will still be available, so click it.
+![Image: Azure VM - Deallocated](/img/azure-deallocated.png)
 
 ## Investigation 3: Managing a CentOS Linux VM in Azure
 In this investigation, we'll create, configure, and manage a CentOS Minimal Virtual Machine using Microsoft Azure. This is a command line only OS, so you'll be using SSH to remotely connect to the VM and issue basic commands. This VM will be used extensively in Lab 2.
@@ -121,6 +125,7 @@ Requirements: An SSH Client
 In the *Overview* tab for the Virtual Machine created in Part 1, look for the **IP address or FQDN** entry. This is the address you will use to connect in this section. Write it down (Hover over the URL, and you'll see a *Copy to clipboard* icon).
 
 **On Windows Using Command Prompt, or macOS/Linux Using Terminal**:
+![Image: Windows Command Prompt - SSH Login to CentOS](/img/azure-cmdssh-login.png)
 1. From the command line, enter the following (using your address from the *Overview* tab):
 ```bash
 ssh yourSenecaUsername@address
@@ -149,6 +154,7 @@ git clone https://github.com/ops705/labs.git ~/bin/
 ```bash
 ls -lh ~/bin
 ```
+![Image: Listed Git Files](/img/listed-git-files.png)
 
 ### Part 4: Adding Your Professor's Public Key
 In this section, you will add your professor's public key to allow them to log in to your Linux VM and run lab checks and perform troubleshooting when needed.
