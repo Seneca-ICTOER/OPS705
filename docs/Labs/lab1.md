@@ -51,7 +51,7 @@ To create your Windows Server 2019 Virtual machine, perform the following steps:
 1. Select the item titled **Windows Server 2019 Datacenter (Gen 2)**. Be careful here! There are many other options.
 1. A new blade, *Create lab resource* appears.
 
-![Image: Azure - Create Lab Resource](/img/azure-vm-labresource.png)
+    ![Image: Azure - Create Lab Resource](/img/azure-vm-labresource.png)
 
 1. In the *Virtual machine name* field, type: **yourSenecaUsername-win** (you only have 15 characters, you may need to abbreviate)
 1. *Username:* **yourSenecaUsername**
@@ -72,16 +72,16 @@ In this section, we'll discover how to remotely connect to the Windows Server's 
 1. Open the RDP file. It should launch the Remote Desktop application and automatically try to connect to your VM.
 1. Upon opening, the VM's URL, port number, and username are automatically provided.
 
-![Image: Windows RDP Dialog](/img/azure-rdp.png)
+    ![Image: Windows RDP Dialog](/img/azure-rdp.png)
 
 1. Type the password you used when creating the VM in Part 1.
 1. Accept the certificate warning. (Click yes.)
 1. You should see a login progress screen, and a Windows Server desktop after a few moments.
 1. Congratulations! You've set up a Windows Server VM and logged in remotely.
 1. Open Notepad, and write:
-```test
-My name is *insertFullName*, and I've completed the Lab 1 Windows Server VM investigation!
-```
+    ```test
+    My name is *insertFullName*, and I've completed the Lab 1 Windows Server VM investigation!
+    ```
 1. Save the file to your VM's desktop, with the filename *yourSenecaUsername.txt*.
 1. **Do not skip Part 3 at this stage! Otherwise, you'll be bleeding funds by leaving the VM running.**
 
@@ -91,6 +91,7 @@ This section is fairly simple. The one thing to never forget: Ensure your VM's s
 1. A notification will appear in the top right of your browser window, confirming your action.
 1. Don't worry about going into the Windows OS and shutting down first. Azure sends a signal to the VM to shut down safely.
 1. If your VM status says stopped, but does not include the **(Deallocated)** text, then resources are still being held by the VM and we're still being charged. The stop button will still be available, so click it.
+
 ![Image: Azure VM - Deallocated](/img/azure-deallocated.png)
 
 ## Investigation 3: Managing a CentOS Linux VM in Azure
@@ -127,47 +128,58 @@ In the *Overview* tab for the Virtual Machine created in Part 1, look for the **
 **On Windows Using Command Prompt, or macOS/Linux Using Terminal**:
 ![Image: Windows Command Prompt - SSH Login to CentOS](/img/azure-cmdssh-login.png)
 1. From the command line, enter the following (using your address from the *Overview* tab):
-```bash
-ssh yourSenecaUsername@address
-```
+    ```bash
+    ssh yourSenecaUsername@address
+    ```
 1. When prompted for a password, use the one you gave when you created the VM. (You won't see anything as you type here; that's normal.)
 1. If login is successful, you should see a prompt like this: `[cjohnson30@cjohnson30-lnx ~]$`
-1. To prove you've completed this section, run the following command: 
-```bash
-hostnamectl
-```
+1. To prove you've completed this section, run the following command:
+
+    ```bash
+    hostnamectl
+    ```
+
 1. Take a full desktop screenshot of the results in the above step.
 1. To quit, type <code>exit</code>.
 
 ### Part 3: Downloading OPS705 Lab Files
 A number of files have been created for you that you need for the next several labs. These must be downloaded to your CentOS VM using the following steps:
 1. Install git: 
-```bash
-sudo yum -y install git
-```
-1. Using git, download all lab files into your bin directory: 
-```bash
-git clone https://github.com/ops705/labs.git ~/bin/
-```
+
+    ```bash
+    sudo yum -y install git
+    ```
+
+1. Using git, download all lab files into your bin directory:
+
+    ```bash
+    git clone https://github.com/ops705/labs.git ~/bin/
+    ```
+
 1. We'll explore how these two commands work in more detail over the next few weeks.
 1. Run the following command to show you've properly downloaded all lab files, and take a screenshot of the result: 
-```bash
-ls -lh ~/bin
-```
-![Image: Listed Git Files](/img/listed-git-files.png)
+
+    ```bash
+    ls -lh ~/bin
+    ```
+
+    ![Image: Listed Git Files](/img/listed-git-files.png)
 
 ### Part 4: Adding Your Professor's Public Key
 In this section, you will add your professor's public key to allow them to log in to your Linux VM and run lab checks and perform troubleshooting when needed.
 
 1. As part of the files you downloaded with git, you should have a file here: `~/bin/professorID.pub`
 1. Using the following command as your **regular user**, install your professor's public key on to your Linux VM: 
-```bash
-cat ~/bin/professorID.pub >> ~/.ssh/authorized_keys
-```
+
+    ```bash
+    cat ~/bin/professorID.pub >> ~/.ssh/authorized_keys
+    ```
+
 1. Verify the key installation was successful by running the following:
-```bash
-cat ~/bin/professorID.pub; cat ~/.ssh/authorized_keys
-```
+
+    ```bash
+    cat ~/bin/professorID.pub; cat ~/.ssh/authorized_keys
+    ```
 
 Compare the output. You should see the contents of **professorID.pub** in your **authorized_keys** file. (*WARNING: Do not delete any additional data in authorized_keys!*)
 
