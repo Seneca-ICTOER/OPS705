@@ -50,6 +50,9 @@ To create your Windows Server 2019 Virtual machine, perform the following steps:
 1. Wait for the *Choose a base* listing to populate. This may take a few moments.
 1. Select the item titled **Windows Server 2019 Datacenter (Gen 2)**. Be careful here! There are many other options.
 1. A new blade, *Create lab resource* appears.
+
+![Image: Azure - Create Lab Resource](/img/azure-vm-labresource.png)
+
 1. In the *Virtual machine name* field, type: **yourSenecaUsername-win** (you only have 15 characters, you may need to abbreviate)
 1. *Username:* **yourSenecaUsername**
 1. *Use a saved secret:* Unchecked
@@ -153,7 +156,7 @@ In this section, you will add your professor's public key to allow them to log i
 1. On Blackboard, find your professor's public key in *Course Documents* and copy the text from inside the file.
 1. Using the following command as your **regular user**, install your professor's public key on to your Linux VM (substitute *professorID* for the actual public key text): 
 ```bash
-echo "*professorID*" >> ~/.ssh/authorized_keys
+echo "professorID" >> ~/.ssh/authorized_keys
 ```
 
 ### Part 5: Fully Stopping your CentOS VM
