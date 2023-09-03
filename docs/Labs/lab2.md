@@ -178,38 +178,54 @@ The default firewall for CentOS, *firewalld* is more complex than we need. We'll
 
 As we are going to run several admin-level commands, we will log in as root for this section:
 1. From your regular user, elevate to the root account:
+
     ```bash
     sudo su -
     ```
+
 1. Install the *iptables-services* firewall package:
+
     ```bash
     yum install iptables-services
     ```
+
 1. Stop the *firewalld* service and start the *iptables* service in a single, chained command:
+
     ```bash
     systemctl stop firewalld; systemctl start iptables
     ```
+
 1. Check the status of the *firewalld* service. It should tell you it's stopped:
+
     ```bash
     systemctl status -l firewalld
     ```
+
 1. Check the status of the *iptables* service. It should tell you it's **active**: 
+
     ```bash
     systemctl status -l iptables
     ```
+
 1. View your current *iptables* firewall rules:
+
     ```bash
     iptables -L -vn --line-numbers
     ```
+
 1. Refer to *Figure 5*. If your rules at this stage look different, stop and contact your professor for help. (Values in the **pkts** and **bytes** column may vary.)
 1. Set the *iptables* firewall to start with the system:
+
     ```bash
     systemctl enable iptables
     ```
+
 1. Remove *firewalld* completely, including all unused files:
+
     ```bash
     yum autoremove firewalld
     ```
+
  * (**Note:** If you don't remove *firewalld* and both firewalls are set to start with the system, *firewalld* will always start instead of iptables. This can lead to much frustration. Make sure you remove it!)
 
 ### Part 2: Securing Your Firewall
@@ -218,30 +234,43 @@ There are a few standard security practices to follow when dealing with firewall
 (Image:Ops705_lab2_fig15.png - Figure 6: Modified iptables firewall rules.)
 
 1. Set your default policy for the INPUT chain to DROP:
+
     ```bash
     iptables -P INPUT DROP
     ```
+
 1. Remove the reject rule from the INPUT chain to hide our server from scans:
+
     ```bash
     iptables -D INPUT 5
     ```
+
 1. Set your default policy for the FORWARD chain to DROP:
+
     ```bash
     iptables -P FORWARD DROP
     ```
+
 1. Remove the reject rule from the FORWARD chain to hide it from scans:
+
     ```bash
     iptables -D FORWARD 1
     ```
+
 1. Verify your changes by running the list rules command again (Refer to *Fig. 6* as a reference):
+
     ```bash
     iptables -nvL --line
     ```
+
 1. To confirm you haven't locked yourself out, log out of SSH and log back in. If you don't encounter any login issues, you're good to go.
+
 1. **Assuming the step above works**, in your Linux VM, save your rule changes:
+
     ```bash
     service iptables save
     ```
+
 1. Congratulations, you've secured your firewall!
 1. Drop back down to your regular user at this point, you never want to stay logged in as root: `exit`
 
@@ -262,9 +291,11 @@ The big thing to remember with vim is that it starts in **COMMAND** mode. You ne
 An interactive tutorial has been created to give you "hands-on" experience on how to use vi text editor. It is recommended that you run this interactive tutorial in your Linux account to learn how to create and edit text files with the vi text editor.
 
 1. Run the interactive tutorial from your CentOS command line:
+
     ```bash
     vi-tutorial
     ```
+
 1. In the tutorial menu, select the first menu item labelled "USING THE VI TEXT EDITOR"
 1. Read and follow the instructions in the tutorial. Eventually, it will display a simulated vi environment and will provide you with "hands-on" practice using the vi text editor.
 1. When you have completed that section, you will be returned to the main menu.
@@ -275,12 +306,15 @@ An interactive tutorial has been created to give you "hands-on" experience on ho
 
 After you have completed the tutorial:
 1. Using `vim`, create a new text file called *othertext.txt* in your home directory with these two commands one at a time:
+
     ```bash
     cd ~
     vim othertext.txt
     ```
+
 1. Write the text shown in *Figure 8* to your new *othertext.txt* file, save, and quit.
 1. Confirm the contents of your text file match *Figure 8*:
+
     ```bash
     cat othertext.txt
     ```
@@ -305,13 +339,13 @@ Refer to the following table of Text File Management Commands:
 | diff file1 file2 | Displays differences between 2 files | `diff otherfile.txt otherfile2.txt` |
 | file | Gives info about the contents of the file (e.g. file with no extension). | `file othertext.txt` |
 
-
 ### Part 2: Adding a Custom Port to SELinux
 **SELinux** is an extra security system that looks for unusual patterns of behaviour in programs. While SELinux is a large topic of its own, we will only work with it briefly here. In this part, we will tell SELinux it's alright for it to allow SSH connections on a custom port.
 
 The default is port **22**, we will be changing it to **22222**.
 
 1. Run the following command (it will several seconds to complete):
+
     ```bash
     sudo semanage port -a -t ssh_port_t -p tcp 22222
     ```
@@ -321,18 +355,25 @@ The default is port **22**, we will be changing it to **22222**.
 
 As mentioned, we want to change what port the system uses to allow incoming SSH connections. To do that, we have to add an extra rule to our firewall to allow it through:
 1. Review your current rules for reference:
+
     ```bash
     sudo iptables -nvL --line
     ```
+
 1. Add a new rule to our firewall for port 22222: 
+
     ```bash
     sudo iptables -A INPUT -p tcp --dport 22222 -j ACCEPT
     ```
+
 1. Confirm your new rule has been added: 
+
     ```bash
     sudo iptables -nvL --line
     ```
+
 1. If it has, save your new rules: 
+
     ```bash
     sudo service iptables save
     ```
@@ -359,25 +400,33 @@ Make sure to follow this method during *Investigation 2* and *Investigation 3*.
 
 (Image:Ops705_sshd_listenport_custom.png - Figure 10: Setting the custom listen port for SSHd.)
 
-1. From the command line, run the following (it will take a few minutes): 
+1. From the command line, run the following (it will take a few minutes):
+
     ```bash
     sudo semanage port -a -t ssh_port_t -p tcp 22222
     ```
+
 1. Using vim, open the SSH configuration file:
+
     ```bash
     sudo vim /etc/ssh/sshd_config
     ```
+
 1. Find the line (near the top) containing the words: `Port 22`
 1. Change this line to read: ``Port 22222``
 1. Save and quit vim.
 1. Restart the sshd service:
+
     ```bash
     sudo systemctl restart sshd
     ```
+
 1. Check the status of the service:
+
     ```bash
     systemctl status -l sshd
     ```
+
     **WARNING: If the status is in a *Failed* state, retrace your steps. Look back at the SSHd config file for typos. Redo the last two steps to apply additional changes.**
 1. If the status is **active (running)**, move onto the next step.
 1. In your **test terminal**, disconnect from your SSH connection and reconnect **using the new port 22222**. 
@@ -404,13 +453,17 @@ In Part 5, you will generate an SSH keypair on your Linux VM, install them, and 
 
 1. First, download and install the FileZilla Client software on your personal computer.
 1. On your Linux VM as a regular user, generate your SSH keypair (accept all defaults):
+
     ```bash
     ssh-keygen
     ```
+
 1. Install the new keys on the system: 
+
     ```bash
     ssh-copy-id -p 22222 localhost
     ```
+
 1. Using FileZilla on your **personal computer**, log into the Linux VM and find your new public and private keys. They can be found on your Linux VM here:  
 
     * **Private Key**: `~/.ssh/id_rsa`
@@ -422,9 +475,11 @@ In Part 5, you will generate an SSH keypair on your Linux VM, install them, and 
     * **On Windows**, store the downloaded key here: `C:\Users\[youruser]\.ssh\`
 
     * **On macOS**, store the downloaded key here: `~/.ssh/`, then run the following commands in macOS Terminal:
+
         ```bash
         chmod 700 ~/.ssh; chmod 600 ~/.ssh/id_rsa
         ```
+
 1. With a second terminal, verify that you can login to your VM's SSH from your personal computer without a password (keypair authentication). Do not move on to the next step until you’re sure.
 
     * Login the same way as before. **If you aren't asked for a password, then keypair authentication has succeeded.**
@@ -435,14 +490,17 @@ In Part 5, you will generate an SSH keypair on your Linux VM, install them, and 
 In this section, you will add your professor's public key to allow them to log in to your Linux VM and run lab checks and perform troubleshooting when needed.
 
 1. Confirm you have the file:
+
     ```bash
     cat ~/bin/professorID.pub
     ```
+
 1. Using the following command as your **regular user**, install your professor's public key on to your Linux VM:
 
     ```bash
     cat ~/bin/professorID.pub >> ~/.ssh/authorized_keys
     ```
+    
 1. On your test terminal, log out and log back in again to check that keypair authentication is still working. If it isn't, backtrack your steps and fix the issue!
 
 #### Disabling SSH password authentication:
