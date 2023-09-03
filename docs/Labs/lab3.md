@@ -40,19 +40,24 @@ The Linux file system is **hierarchical**, like other operating systems such as 
 
 Learning how to issue Linux commands for **navigating** and **manipulating** directory and files within the the Linux filesystem are **essential skills** for Linux users and Linux system administrators (i.e. ''sysadmins'').
 
-In the Linux OS, the **root directory** / is the  starting directory, and other ''child directories'',  ''grandchild directories'', etc. can be created as required. This hierarchical structure resembles an "''upside-down tree''". There is actually a command called `tree` that displays a **directory tree diagram**!
+In the Linux OS, the **root directory** / is the  starting directory, and other ''child directories'',  ''grandchild directories'', etc. can be created as required. This hierarchical structure resembles an "''upside-down tree''".
 
-To install the `tree` command:
+![Image: Linux - Directory Structure](/img/linux-directory-structure.png)
+
+There is actually a command called `tree` that displays a **directory tree diagram**! 
+
+To install the `tree` command within Linux:
 
 ```bash
 sudo yum install tree
 ```
 
 ### Directory Pathnames
-(Image:path-name.png - A pathname points to a file system location by **following the directory tree hierarchy**.)
 
 > A **pathname** is used to specify a **route to a file** within the file system.
+>
 >![Image: Linux - Pathnames](/img/linux-pathname.png)
+>
 > A pathname **points** to a file system location by **following the directory tree hierarchy** expressed in a string of characters in which path components, separated by a delimiting character, represent each directory. The **delimiting character** is most commonly the slash ("**/**").
 >
 > (Reference: [Wikipedia](https://en.wikipedia.org/wiki/Path_(computing)))
