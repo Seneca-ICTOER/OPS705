@@ -48,7 +48,7 @@ To create your Windows Server 2019 Virtual machine, perform the following steps:
 1. Navigate to *DevTest Labs > OPS705 > My virtual machines*
 1. Click the **+ Add** button.
 1. Wait for the *Choose a base* listing to populate. This may take a few moments.
-1. Select the item titled **Windows Server 2019 Datacenter (Gen 2)**. Be careful here! There are many other options.
+1. Select the item titled **Windows Server 2019 Datacenter**. Be careful here! There are many other options.
 1. A new blade, *Create lab resource* appears.
 
     ![Image: Azure - Create Lab Resource](/img/azure-vm-labresource.png)
