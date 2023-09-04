@@ -7,7 +7,7 @@ description: Weekly Schedule for OP705
 
 # Weekly Schedule
 
-**Please note:** The weekly due dates for labs are *soft due dates*. You should aim to have labs completed by these dates to keep on top of the course and prepare for the relevant quizzes. ***The hard deadline (without penalty) for Labs 1-4 is Friday, October 20, 2023***.
+**Please note:** The weekly due dates for labs are *soft due dates*. You should aim to have labs completed by these dates to keep on top of the course and prepare for the relevant quizzes. ***The hard deadline (without penalty) for Azure Labs 1-4 is Friday, October 20, 2023***.
 
 ## Week 1: Sept. 4-10
 
@@ -22,7 +22,7 @@ description: Weekly Schedule for OP705
 
 | Topics or Skill | Reading | Assessment Due | Weight |
 | :--- | :--- | :--- | :--- |
-| Introduction to CentOS Linux | Posted links and video lectures/Live demonstrations | Lab 1 – Creating Virtual Machines in Azure | 2% |
+| Introduction to CentOS Linux | Posted links and video lectures/Live demonstrations | Azure Lab 1 – Creating Virtual Machines in Azure | 2% |
 | Introduction to the Command Line | Lecture slides | Quiz 1 | 3.75% |
 | Updating CentOS |  |  |  |
 | Securing CentOS |  |  |  |
@@ -31,7 +31,7 @@ description: Weekly Schedule for OP705
 
 | Topics or Skill | Reading | Assessment Due | Weight |
 | :--- | :--- | :--- | :--- |
-| Understanding the Command Line | Posted links and video lectures/Live demonstrations | Lab 2 – Administrative Access and Securing Your VMs | 2% |
+| Understanding the Command Line | Posted links and video lectures/Live demonstrations | Azure Lab 2 – Administrative Access and Securing Your VMs | 2% |
 | Navigating the Linux Filesystem | Lecture slides | Quiz 2 | 3.75% |
 | Working with Files |  |  |  |
 | Using System Utilities |  |  |  |
@@ -40,7 +40,7 @@ description: Weekly Schedule for OP705
 
 | Topics or Skill | Reading | Assessment Due | Weight |
 | :--- | :--- | :--- | :--- |
-| Managing Software Packages | Posted links and video lectures/Live demonstrations | Lab 3 – Linux and the Command Line Interface | 2% |
+| Managing Software Packages | Posted links and video lectures/Live demonstrations | Azure Lab 3 – Linux and the Command Line Interface | 2% |
 | Working With Services | Lecture slides | Quiz 3 | 3.75% |
 | Intro to Networking |  |  |  |
 | Setting Up Application Firewalls Rules |  |  |  |
@@ -49,7 +49,7 @@ description: Weekly Schedule for OP705
 
 | Topics or Skill | Reading | Assessment Due | Weight |
 | :--- | :--- | :--- | :--- |
-| Advanced Networking | Posted links and video lectures/Live demonstrations | Lab 4 – Setting Up a Multi-VM Application Server Environment | 4% |
+| Advanced Networking | Posted links and video lectures/Live demonstrations | Azure Lab 4 – Setting Up a Multi-VM Application Server Environment | 4% |
 | Assignment 1 Release and Review | Lecture slides | Quiz 4 | 3.75% |
 
 ## Week 6: Oct. 9-15
@@ -102,8 +102,8 @@ description: Weekly Schedule for OP705
 | Topics or Skill | Reading | Assessment Due | Weight |
 | :--- | :--- | :--- | :--- |
 | AWS Databases | AWS Module 8 | AWS Lab 3 – Introduction to Amazon EC2 | 1% |
-|  |  | Lab Activity 1: AWS Lambda | 0.5% |
-|  |  | Lab Activity 2: Elastic Beanstalk | 0.5% |
+|  |  | AWS Lab Activity 1: AWS Lambda | 0.5% |
+|  |  | AWS Lab Activity 2: Elastic Beanstalk | 0.5% |
 |  |  | Quiz 7 | 3.75% |
 
 ## Week 12: Nov. 27 - Dec. 3
