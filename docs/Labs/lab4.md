@@ -1,0 +1,168 @@
+---
+id: lab4
+title: Lab 4
+sidebar_position: 4
+description: Lab 4 - Setting Up a Multi-VM Application Server Environment
+---
+
+# Lab 4: Setting Up a Multi-VM Application Server Environment
+
+## Lab Preparation
+
+### Purpose / Objectives of Lab 4
+In this lab, you will set up a basic Apache web server (including some light HTML coding) and supporting iptables firewall rules. You will also set up an IIS-based web server on your Windows Server VM, and learn how to set up port forwarding through your Linux Server VM to allow access to the IIS web server on the Internet.
+
+If you encounter technical issues, please contact your professor via e-mail or in your section's Microsoft Teams group.
+
+### Minimum Requirements
+Before beginning, you must have: 
+1. Successfully completed Lab 3.
+1. Attended the Week 5 lectures.
+1. Read through the Week 5 slides, and have them handy as a reference for concepts.
+1. Your Azure-based Linux VM.
+
+## Investigation 1: Setting Up A Web Server on CentOS
+In this investigation, you'll install the Apache web server package from a Linux repository and set up the service.
+
+### Part 1: Setting Up and Managing the httpd (Apache) Service
+(Image:Ops705_lab4_httpd.png - Figure 1: Status of the apache service.)
+
+1. From within your Linux server, install the ``httpd`` package.
+1. Now that the package is installed, it's time to start up the web server. Using systemd commands, start the `httpd` service.
+1. Next, confirm the service has started without any errors. (**Tip:** Always check the status of a service you've just modified, whether you're starting, stopping, or restarting it.)
+1. Finally, check the web server is serving web pages by loading a page locally: 
+
+    ```bash
+    curl localhost
+    ```
+
+     If you get a bunch of HTML code, you've succeeded! (Curl doesn't render HTML code, so you see it as plain text. This is how we check the web server works without dealing with networking.)
+1. Remember from our lecture, there's a difference between **start** and **enable**. Ensure the web server starts up with the system *every* time.
+1. In a browser on your **local computer**, copy and paste the address for your Linux VM. It doesn't load, does it? We're not done. Move to **Part 2** to deal with the firewall.
+
+### Part 2: Allowing Web Traffic
+(Image:Ops705_lab4_httpd_rules.png - Figure 2: New HTTP rule added to our firewall.)
+
+In this section, you will follow security best practices to allow web server traffic into your VM. We'll open a firewall exception to allow requests to our web server through, so we can access our new web server from the Internet.
+
+1. Before making changes, it's a good idea to review our current rules: 
+
+    ```bash
+    iptables -L -vn --line-numbers
+    ```
+1. Add your rule exception. Web traffic is typically served on TCP port 80, and that's what we'll use: 
+
+    ```bash
+    iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+    ```
+
+1. Go back to your local browser, and reload the page. Does it work now?
+1. If it does, congratulations! **You're almost done.**
+1. Back in you SSH session, **save your new rules**! Remember, changes you make will be erased when you shut down unless you save them.
+
+### Part 3: Editing Your Apache Website
+
+(Image:Ops705_lab4_linux_html_code.png - Figure 3: Code example of index.html.)
+
+Finally, let's modify the main page. Currently, it's displaying the default Apache splash page. Let's change that.
+
+1. Navigate to: `/var/www/html`
+1. List all files in this directory. There are none; this is expected.
+1. In this location, elevate to root privileges and open a new vim session to: `index.html`
+1. Using HTML, give it a title of: **OPS705 Linux Server - Fall 2023**.
+1. Using HTML, add to the body: **Name: yourname**
+1. Using HTML, add to the body as a new line: **Student Username: yourstudentusername**
+1. Here's how that basic HTML code looks like: 
+
+    ```html
+    <html>
+      <head>
+        <title>
+          OPS705 Linux Server - Fall 2023
+        </title>
+      </head>
+      <body>
+        Name: <b>insertyourfullname</b>
+        <br>Student Number: <b>yourstudentusername</b></br>
+      </body>
+    </html>
+    ```
+
+1. Save and quit the vim session.
+1. In your **local** browser, refresh the page. If your changes show up, you're done!
+
+## Investigation 2: Setting Up A Web Server on Windows Server 2019
+Setting up an Internet Information Services web server on an Azure VM is incredibly easy, especially in contrast to the Apache setup.
+
+### Part 1: Installing and Verifying the IIS Web Server
+
+(Image:Ops705_lab4_iis_artifact.png - Figure 4: Adding the IIS artifact in Azure.)
+
+1. Spin up your Windows Server VM, and wait until it's fully started up.
+1. In the Azure blade for your Windows Server VM, add and apply the **Internet Information Services (IIS)** artifact.
+1. When complete, open a browser inside the Windows Server VM, and navigate to `http://localhost`. You should see the IIS default splash page. Congratulations!
+
+### Part 2: Editing Your IIS Website
+
+(Image:Ops705_lab4_iis_explore.png - Figure 5: Finding the *Explore* link in IIS.)
+
+1. First: In a new file explorer window, find the *View* menu item near the top, and click *File name extensions*.
+1. Next: Open **Server Manager** from the Start menu and click on the **Local Server** menu bar option.
+1. Towards the top of the window, click **Tools > Internet Information Services (IIS) Manager**
+1. In the new window in the *Connections* menu column on the left, expand the **Sites** folder and click on **Default Web Site**.
+1. In the *Actions* menu column on the right, click **Explore**. This will open a new folder where your IIS web pages are stored.
+1. Right-click anywhere in that window, click **New > Text Document**. Name it **index.html**. Save it with double-quotes to make sure it's saved as an HTML file, not text. `"index.html"`
+1. Open the text file, and write the same HTML code as Investigation 1, changing the title tag to: **OPS705 IIS Web Server - Fall 2023**.
+1. Refresh your browser page from *Part 1*: `http://localhost` You should see your new code.
+1. On your **local computer**, open a browser and navigate to the URL you used to remotely connect to your Windows Server VM. Unlike the Linux Server in Lab 3, the web page you created does not appear. We still have some work to do.
+
+## Investigation 3: Routing Through Your Linux Server
+In this investigation, you'll set up your Linux Server VM to forward requests to your Windows VM's IIS web server. This is an advanced topic. Reviewing the Week 5 material is highly recommended. The following investigation assumes you understand the concepts discussed in those lectures.
+
+### Part 1: Enabling System-Level Forwarding on Your Linux Server
+
+(Image:Ops705_lab4_ip_forwarding.png - Figure 6: The */etc/sysctl.conf* file with IP forwarding added.)
+
+1. Remote SSH into your Linux Server VM.
+1. Elevate to root.
+1. Use vim to open **/etc/sysctl.conf**
+1. Add the line: `net.ipv4.ip_forward = 1` (Make sure it's a new line, and that it **doesn't** start with a *1.* symbol.)
+1. Save and quit vim.
+1. At the command prompt, run: `sysctl -p`
+1. Confirm you've properly enabled system-level forwarding with the following command: `sysctl net.ipv4.ip_forward`
+1. The response from the command above should say **net.ipv4.ip_forward = 1**. If not, revisit the steps in Part 2.
+
+### Part 2: Port Forwarding Using NAT
+
+(Image:Ops705_lab4_port_forwarding.png - Figure 7: View of the NAT tables with our port forwarding rules added.)
+
+1. Remote into your Windows Server VM, open Command Prompt, and run `ipconfig` Write down the 10.x.x.x IP address displayed.
+1. Remote SSH into your Linux Server VM, and elevate to root.
+1. Confirm you can access the IIS web server on your Linux VM by running: `curl **IP-address-from-step-1**` If you see plain HTML code displayed, move to the next step.
+1. We're going to be working with the NAT table. Let's look at the NAT rules listing with the following command: `iptables -t nat -nvL --line`
+1. Set up a port forwarding rule so all requests to sent your Linux VM on port 8080 get forwarded to your Windows VM on port 80. Run the following: `iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination *windows-server-ip-from-step-1*:80`
+1. Set up NAT for all forwarded traffic: `iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE`
+1. Confirm your new NAT table rules with the command from Step 4.
+1. Once confirmed, save your updated rules!
+
+### Part 3: Adding Forwarding Firewall Rule Exceptions
+
+(Image:Ops705_lab4_forward_rules.png - Figure 8: View of the default tables with our IP forwarding rules added.)
+1. Create a firewall rule to allow forwarded traffic destined for TCP port 80: `iptables -A FORWARD -p tcp --dport 80 -j ACCEPT`
+1. Create a firewall rule to allow forwarded traffic sent from TCP port 80: `iptables -A FORWARD -p tcp --sport 80 -j ACCEPT`
+1. Watch your firewall rules and their packet counters with the following command: `watch iptables -nvL --line`
+1. In a browser on your **local computer**, paste the URL for your Linux VM, adding **:8080** to the end of the address, then hit Enter. (Make sure you aren't using https!)
+1. If you've done your work right, the Windows IIS web page should appear!
+1. Review the packet count from your watch command in Step 3. Notice the new forward rules are working! Keep this in mind for troubleshooting.
+1. In your SSH session, use the keyboard combination **Ctrl** and **c** to halt the watch program.
+1. Now that you know your new rules work, **save your new rules**!
+
+## Lab Submission
+Submit to Blackboard full-desktop screenshots (PNG/JPG) of the following:
+
+1. Browser window showing the Linux Apache page (on your local computer, not displayed on your VM).
+1. Browser window showing the Windows IIS page (on your local computer, not displayed on your VM).
+1. SSH session window with your iptables rules listed.
+1. SSH session window with your iptables NAT table rules listed.
+
+**Reminder:** Make sure to fully stop your VMs when you're done!
