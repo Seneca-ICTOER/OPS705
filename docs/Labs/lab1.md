@@ -21,7 +21,7 @@ Before beginning, you must have:
 1. Attended the Week 1 lectures (or watched the posted recording).
 1. Your Seneca login credentials.
 1. A mobile device (phone/tablet) to setup 2FA (two-factor authentication).
-1. Your a copy (digital or printed) of the [OPS705 Lab Logbook - Azure](/files/azure-logbook.docx).
+1. Your copy (digital or printed) of the [OPS705 Lab Logbook - Azure](/files/azure-logbook.docx).
 
 ## Investigation 1: Connecting to Your Azure Account 
 In this investigation, you'll log in to your Seneca-provided Azure account and ensure you have access to our DevTest Labs classroom.
