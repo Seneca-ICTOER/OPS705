@@ -158,6 +158,7 @@ In this investigation, you'll set up your Linux Server VM to forward requests to
 1. Create a firewall rule to allow forwarded traffic sent from TCP port 80: `iptables -A FORWARD -p tcp --sport 80 -j ACCEPT`
 1. Confirm your new forward rules: `iptables -nvL --line`
     ![Image: Confirming port 80 forward rules](/img/forward-80.png)
+1. If correct, save your rules!
 1. Watch your firewall rules and their packet counters with the following command: `watch iptables -nvL --line`
 1. In a browser on your **local computer**, paste the URL for your Linux VM, adding **:8080** to the end of the address, then hit Enter. (Make sure you aren't using https!)
 1. If you've done your work right, the Windows IIS web page should appear!
