@@ -25,11 +25,13 @@ Before beginning, you must have:
 In this investigation, you'll install the Apache web server package from a Linux repository and set up the service.
 
 ### Part 1: Setting Up and Managing the httpd (Apache) Service
-(Image:Ops705_lab4_httpd.png - Figure 1: Status of the apache service.)
 
 1. From within your Linux server, install the ``httpd`` package.
 1. Now that the package is installed, it's time to start up the web server. Using systemd commands, start the `httpd` service.
 1. Next, confirm the service has started without any errors. (**Tip:** Always check the status of a service you've just modified, whether you're starting, stopping, or restarting it.)
+
+    ![Image: Apache Status](/img/apache-status.png)
+
 1. Finally, check the web server is serving web pages by loading a page locally: 
 
     ```bash
@@ -50,11 +52,20 @@ In this section, you will follow security best practices to allow web server tra
     ```bash
     iptables -L -vn --line-numbers
     ```
+
 1. Add your rule exception. Web traffic is typically served on TCP port 80, and that's what we'll use: 
 
     ```bash
     iptables -A INPUT -p tcp --dport 80 -j ACCEPT
     ```
+
+1. Confirm your new rule has been applied: 
+
+    ```bash
+    iptables -L -vn --line-numbers
+    ```
+
+    ![Image: Apache Status](/img/rule-80.png)
 
 1. Go back to your local browser, and reload the page. Does it work now?
 1. If it does, congratulations! **You're almost done.**
@@ -82,8 +93,9 @@ Finally, let's modify the main page. Currently, it's displaying the default Apac
         </title>
       </head>
       <body>
-        Name: <b>insertyourfullname</b>
-        <br>Student Number: <b>yourstudentusername</b></br>
+        <b>OPS705 Linux Server - Fall 2023</b>
+        <p>Name: <b>insertyourfullname</b></p>
+        <br>Username: <b>yourstudentusername</b></br>
       </body>
     </html>
     ```
