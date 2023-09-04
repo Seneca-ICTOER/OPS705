@@ -154,13 +154,13 @@ Listed below are some common **file naming rules**:
 * **Avoid using spaces** for directory names (consider periods, hyphens, and underscores instead)
 
 ### Part 1: Directory Creation
-(Image:directory-structure-3.png - **Fig. 4: Tree diagram** of directory structure to create in your **home** directory (displayed in blue text).)
-
 Creating subdirectories within your home directory makes it more **efficient** to save and access files on your Linux server.
 
 A comparison would be rooms in a house. If there were no rooms, just one large room in a 3,000 square foot house, it would be "messy" and difficult to locate items. Each room in a house is used to for a specific purpose to be more productive to perform a task such as a kitchen, bedroom, bathroom, etc.
 
-You will be creating the following directory structure within your home directory (refer to diagram on the right side (*Fig. 4*)).
+You will be creating the following directory structure within your user home directory. The directories you will create in this investigation are in blue.
+
+![Image: Investigation 1 Directory Structure](/img/L3I1-directorystructure.png)
 
 #### Creating Directories
 We will now create our first level of directories.
@@ -307,58 +307,116 @@ For example:
 * Making syntax errors (eg. spelling or mixing up character case)
 * Not creating subdirectories within specified directories.
 
-To check for mistakes, a **shell script** has been created to check your work. **If the checking shell script detects an error**, then it will provide feedback and offer constructive feedback on how to fix that problem so you can re-run the checking shell scripts until your work is correct.
+To check for mistakes, a **shell script** has been created to check your work for you. 
+
+**If the checking shell script detects an error**, then it will tell you and offer constructive feedback on how to fix that problem so you can re-run the checking shell scripts until your work is correct.
 
 Perform the following steps:
-
-1. Change directories to: **~/bin**
+1. Change directories to ~/bin: `cd ~/bin`
 1. Make sure you have the most recent lab files: `git pull`
-1. Change back to your home directory.
-1. Run the checking script for Part 1: `labcheck3.1.sh`
-* If you encounter errors, then view the feedback to make corrections, and then re-run the checking script.
-* If you receive a congratulations message that there are no errors, then proceed to the next part.
-1. Assuming you received a **congratulations** message, take a screenshot of the full script output. You'll need it for later.
+1. Change back to your home directory: `cd ~`
+1. Run the checking script for your Linux work in this lab: `labcheck3.1.sh`
+1. **If you encounter errors:**
+    * Review the feedback.
+    * Make the necessary corrections.
+    * Re-run the checking script.
+1. If all checks pass (with the congratulations message), take a screenshot of the **full script output** (don't leave any text out or cut off). You'll need it for later.
 
 ### Part 2: Viewing Directory Contents / Copying & Moving Directories
 Now that you have learned how to efficiently create your directory structure, you will now learn how to issue Linux commands to **view directory contents** as well as **copy** and **move** directories.
 
 Perform the following steps:
 
-1. Issue the following Linux command: `tree`
-1.* **NOTE:** You should see the directory structure that you created in the previous investigation. You can also issue the tree command combined with a directory pathname to display the directory structure for a specific scope.
-1.* You can also use the -R option for the ls command to display all directories and subdirectories for a specified directory path (referred to as a recursive directory listing).
-1. Issue the following Linux command: `ls -lR`
-1.* What directories do you see?
-1. Issue the following Linux command: `ls -lR uli101xx`
-1.* Note the differences between both of these commands (i.e. using and not using a pathname).
-1. You can copy and move entire directories (and their contents) to other directories. Issue the following Linux command: `cp -R uli101xx xyz100xx`
-1. Display the directory structure of your home directory to confirm you copied the uli101xx directory: `tree`
-1. Issue the following Linux command: `mv acp100xx xyz100xx/uli101xx/tutorials`
-1. Display the directory structure of your home directory to confirm you moved the acp100xx directory: `tree`
+1. Ensure you're starting from your user's home directory:
 
-**Let's run a checking script to see if you moved and copied the directories correctly:**
+    ```bash
+    cd ~
+    ```
+
+1. Let's confirm you can see the directory structure you created in the previous investigation:
+
+    ```bash
+    tree
+    ```
+
+1. Alternatively, we can also use the `-R` option with the `ls` command to display all directories and subdirectories from a specified starting point *recursively*. Run the next two commands one at a time and note the difference between what's displayed:
+
+    ```bash
+    ls -lR
+    ls -lR uli101xx
+    ```
+
+1. You can copy and move entire directories (and their contents recursively) to other directories. Review the syntax example and then run the actual command beneath:
+
+    Syntax example: `cp -R sourcedirectory destinationdirectory`
+
+    ```bash
+    cp -R uli101xx xyz100xx
+    ```
+
+    It's important to understand that, in a recursive copy, the directory `uli101xx` and anything inside of it are copied *into* the `xyz100xx` directory.
+
+
+1. Display the directory structure of your user home directory to confirm you copied the `uli101xx` directory successfully:
+
+    ```bash
+    tree
+    ```
+
+1. Let's move the `apc100xx` directory:
+
+    ```bash
+    mv acp100xx xyz100xx/uli101xx/tutorials
+    ```
+
+    Notice we didn't use the `-R` option with `mv`. The move command is *always* recursive by default. (Adding `-R` to a move results in a syntax error.)
+
+1. Confirm you moved the `acp100xx` directory successfully:
+
+    ```bash
+    tree
+    ```
+
+**Confirm your work by running the next check script:**
 1. Make certain that your current directory is your home directory.
 1. Run the checking script for Part 2: `labcheck3.2.sh`
 1. Take a screenshot of the full script output. You'll need it for later.
 
 If you encounter errors, make corrections and re-run the checking script until you receive a congratulations message.
 
-Proceed to Part 3.
-
 ### Part 3: Removing Directories
 You will now learn how to safely remove directories and their contents.
 
 Perform the following steps:
 1. Confirm that you are located in your home directory.
-1. The rmdir command is used to remove empty directories. Remove the empty directory called *tutorials*: `rmdir uli101xx/tutorials`
+1. The `rmdir` command is used to remove empty directories. Remove the empty directory called *tutorials*:
+
+    ```bash
+    rmdir uli101xx/tutorials
+    ```
+
 1. Confirm that you removed the tutorials directory.
-1. Remove the empty directory called *uli101xx*: `rmdir uli101xx`
-1.* **NOTE:** You should get an error message, since the *uli101xx* directory is NOT empty.
-1. To remove non-empty directories, you can use the `rm -r` option, which can travel down the directory paths and their contents: `rm -r uli101xx`
-1. Confirm that the *uli101xx* directory (contained in your home directory) and its contents have been removed.
-1.* **NOTE:** To safely remove non-empty directories, you can add the `-i` option, which will prompt the user if they wish to remove contents as it your travel recursively down a directory to remove directories and their contents.
-1. Issue the following Linux command (entering "y" when prompted): `rm -ri xyz100xx`
-1.* **NOTE:** You should have removed all directories that you have created.
+1. Attempt to remove the *uli101xx* directory:
+
+    ```bash
+    rmdir uli101xx
+    ```
+
+    **NOTE:** You should get an error message, since the *uli101xx* directory is NOT empty.
+1. To remove non-empty directories, you can use the `rm -r` option, which can travel down the directory paths and their contents *recursively*:
+
+    ```bash
+    rm -r uli101xx
+    ```
+
+1. Confirm that the *uli101xx* directory (contained in your user home directory) and its contents have been removed.
+1. To safely remove non-empty directories, you can add the `-i` option, which will prompt the user if they wish to remove contents as it your travel recursively down a directory to remove directories and their contents. Issue the following Linux command (entering "y" when prompted):
+
+    ```bash
+    rm -ri xyz100xx
+    ```
+
+1. You should have removed all directories from the previous step.
 
 **Let's run a checking script to confirm that you have correctly removed all of those directories:**
 1. Make certain that your current directory is your home directory.
@@ -366,3 +424,174 @@ Perform the following steps:
 1. Run the checking script for Part 3: `labcheck3.3.sh`
 
 If you encounter errors, make corrections and re-run the checking script until you receive a congratulations message.
+
+## Investigation 2: Absolute / Relative / Relative-to-Home Pathnames
+The best way to learn about different types of file pathnames is to use them while issuing Linux commands and see which pathnames (or combination of pathnames) is the most efficient (i.e. requiring the least number of keystrokes).
+
+In the following investigation (Parts 1-3), you will create the exact same directory structure each time, but using a different path type.
+
+First, let's confirm:
+1. Connect to your CentOS VM's CLI.
+1. Issue a command to confirm you are located in your **home** directory.
+
+In this investigation, you will create the blue sections of this tree diagram. 
+
+![Image: Investigation 2 Directory Structure](/img/L3I2-directorystructure.png)
+
+### Part 1: Using Absolute Pathnames
+Let's create the following directory structure under your home directory by issuing the `mkdir` command using only **absolute** pathnames.
+
+1. Issue the following Linux command to create the directory structure displayed above using **absolute pathnames** (remember to substitute 'youruserid' with your actual userid):
+
+    ```bash
+    mkdir -p /home/youruserid/tutorial3/practice/commands /home/youruserid/tutorial3/practice/examples /home/youruserid/tutorial3/notes/lesson1 /home/youruserid/tutorial3/notes/lesson2
+    ```
+
+1. Confirm that you properly created the directory structure:
+
+    ```bash
+    tree /home/youruserid/tutorial3
+    ```
+
+1. Notice that using absolute pathnames with this Linux command requires a lot of typing.
+
+### Part 2: Using Relative-to-Home Pathnames
+Let's remove this directory structure, and issue the same command using a **relative-to-home** pathname instead.
+
+1. To remove this directory structure, issue the following Linux command (enter "y" at each prompt to remove ALL contents):
+
+    ```bash
+    rm -ri /home/youruserid/tutorial3
+    ```
+
+1. Confirm that the directory structure has been removed:
+
+    ```bash
+    tree
+    ```
+
+1. Create the same directory structure using *relative-to-home pathnames*:
+
+    ```bash
+    mkdir -p ~/tutorial3/practice/commands ~/tutorial3/practice/examples ~/tutorial3/notes/lesson1 ~/tutorial3/notes/lesson2
+    ```
+
+    * NOTE: To generate the `~` character, hold down SHIFT and press the button to the left of the number 1 above the text on your keyboard.
+1. **Question:** Did this command require less typing than the previous command using absolute pathnames?
+1. Confirm the directory structure was properly created:
+    ```bash
+    tree
+    ```
+
+### Part 3: Using Relative Pathnames
+Let's remove the *tutorial3* directory and its contents and issue the same command using **relative pathnames**.
+
+1. Issue the same command as you did in Part 2 to remove the *tutorial3* directory and its contents safely.
+1. Issue a Linux command to confirm you removed the *tutorial3* directory and its contents.
+1. Create the same directory structure using relative pathnames:
+
+    ```bash
+    mkdir -p tutorial3/practice/commands tutorial3/practice/examples tutorial3/notes/lesson1 tutorial3/notes/lesson2
+    ```
+
+1. Issue a command to verify that the proper directory structure was created.
+
+You may think that issuing Linux file management commands are better using relative or relative-to-home pathnames instead of absolute pathnames, but that is not always true.
+
+Since the current directory location was your home directory, it makes sense to use relative or relative-to-home pathnames. On the other hand, what if we changed the location to a different directory? For example, `/bin`?
+
+**Let's run a checking script to verify you created the Part 1-3 directories correctly:**
+1. Make certain that your current directory is your home directory.
+1. Issue the `tree` command to confirm that all of those recently created directories have been removed.
+1. Run the checking script for Parts 1-3: `labcheck3.4.sh`
+
+If you encounter errors, make corrections and re-run the checking script until you receive a congratulations message.
+
+### Part 4: Pathing Practice
+![Image: Investigation 2 Directory Structure](/img/L3I2-directorystructure.png)
+
+When performing the next series of steps, refer to the tree diagram above. Learning to reference a tree diagram on a quiz, midterm or final exam can help to prevent errors and loss of marks!
+
+Perform the following:
+1. Change to the examples directory in your recently-created directory structure:
+
+    ```bash
+    cd tutorial3/practice/examples
+    ```
+    
+1. Confirm you are located in the *examples* directory.
+1. Remembering that we are located in the *examples* directory, issue the following Linux command using a relative pathname to display files in the */bin* directory:
+
+    ```bash
+    ls ../../../../../bin
+    ```
+
+1. Now issue the following Linux command using an absolute pathname:
+
+    ```bash
+    ls /bin
+    ```
+     **Question:** Which type of pathname would be the best to use in this situation?
+1. Let's copy the program `ls` (contained in the */bin* directory) to your user home directory by using the `cp` command.
+1. First, copy the *ls* command from the */bin* directory to your home directory using absolute pathnames:
+
+    ```bash
+    cp /bin/ls /home/youruserid/
+    ```
+1. Now let's issue the previous command using just relative pathname (remember, our current directory location is *examples*):
+
+    ```bash
+    cp ../../../../../bin/ls ../..
+    ```
+
+    **TIP: For relative pathnames that move up multiple parent directories such as these, it is HIGHLY RECOMMENDED to view the tree diagram and check for the correct number of .. symbols. Students commonly make mistakes and lose marks on these type of questions!**
+1. Let's issue the command using one absolute pathname and a relative pathname:
+
+    ```bash
+    cp /bin/ls ../..
+    ```
+
+    **Question:** What did this command do?
+1. Let's issue the same command using one absolute pathname and a relative-to-home pathname:
+
+    ```bash
+    cp /bin/ls ~
+    ```
+
+    **Question:** What did this command do?
+1. Let's copy the `ls` program from the */bin* directory to your current directory (i.e. examples):
+
+    ```bash
+    cp /bin/ls .
+    ```
+
+1. Issue the following Linux command:
+
+    ```bash
+    cp /bin/ls ./ls.bk
+    ```
+
+    **Question:** What does this command do?
+
+**Let's run a checking script to make certain you performed the recently-issued commands correctly:**
+1. Make certain that your current directory is your home directory.
+1. Issue the `tree` command to confirm that all of those recently created directories have been removed.
+1. Run the checking script for Part 4: `labcheck3.5.sh`
+
+If you encounter errors, make corrections and re-run the checking script until you receive a congratulations message.
+
+## Lab Submission
+Submit to Blackboard full-desktop screenshots (PNG/JPG) of the following:
+1. A successful run of `labcheck3.1.sh`
+1. A successful run of `labcheck3.2.sh`
+1. A successful run of `labcheck3.3.sh`
+1. A successful run of `labcheck3.4.sh`
+1. A successful run of `labcheck3.5.sh`
+
+**Reminder:** Make sure to fully stop your VMs when you're done!
+
+= Licensing =
+
+Author: Chris Johnson
+
+License: [LGPL version 3](https://www.gnu.org/licenses/lgpl.html)

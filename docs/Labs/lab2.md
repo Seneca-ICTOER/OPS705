@@ -569,7 +569,7 @@ Perform the following steps:
     * Review the feedback.
     * Make the necessary corrections.
     * Re-run the checking script.
-1. If all checks pass, take a screenshot of the **full script output** (don't leave any text out or cut off). You'll need it for later.
+1. If all checks pass (with the congratulations message), take a screenshot of the **full script output** (don't leave any text out or cut off). You'll need it for later.
 
 ## Investigation 5: Updating Windows Server 2019
 Updating your Windows Server VM in Azure is a little bit easier. It takes advantage of the cloud infrastructure to allow point-and-click updates.
