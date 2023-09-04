@@ -115,13 +115,12 @@ Setting up an Internet Information Services web server on an Azure VM is incredi
 
 ### Part 2: Editing Your IIS Website
 
-(Image:Ops705_lab4_iis_explore.png - Figure 5: Finding the *Explore* link in IIS.)
-
 1. First: In a new file explorer window, find the *View* menu item near the top, and click *File name extensions*.
 1. Next: Open **Server Manager** from the Start menu and click on the **Local Server** menu bar option.
 1. Towards the top of the window, click **Tools > Internet Information Services (IIS) Manager**
 1. In the new window in the *Connections* menu column on the left, expand the **Sites** folder and click on **Default Web Site**.
 1. In the *Actions* menu column on the right, click **Explore**. This will open a new folder where your IIS web pages are stored.
+    ![Image: IIS Explore Dialog](/img/iis-explore.png)
 1. Right-click anywhere in that window, click **New > Text Document**. Name it **index.html**. Save it with double-quotes to make sure it's saved as an HTML file, not text. `"index.html"`
 1. Open the text file, and write the same HTML code as Investigation 1, changing the title tag to: **OPS705 IIS Web Server - Fall 2023**.
 1. Refresh your browser page from *Part 1*: `http://localhost` You should see your new code.
