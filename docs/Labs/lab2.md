@@ -607,7 +607,7 @@ Updating your Windows Server VM in Azure is a little bit easier. It takes advant
     1. Windows Firewall operations – Enable ICMP (Ping)
     1. Installs the latest Windows Updates
 
-    ![Image: Lab 2 - Windows Artifacts](/img/lab2-artifacts.png)
+    ![Image: Lab 2 - Windows Artifacts](/img/lab2-artifacts.jpeg)
 
 1. You'll be returned to the *Add artifacts* window. Simply click **OK** to install them.
 1. The *Manage Artifacts* window will return, and a new entry for each artifact will appear. Their statuses will cycle through *Pending*, *Installing*, and finally *Succeeded*.
