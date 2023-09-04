@@ -106,8 +106,6 @@ Setting up an Internet Information Services web server on an Azure VM is incredi
 
 ### Part 1: Installing and Verifying the IIS Web Server
 
-(Image:Ops705_lab4_iis_artifact.png - Figure 4: Adding the IIS artifact in Azure.)
-
 1. Spin up your Windows Server VM, and wait until it's fully started up.
 1. In the Azure blade for your Windows Server VM, add and apply the **Internet Information Services (IIS)** artifact.
     ![Image: Adding IIS Artifact](/img/iis-artifact.png)
@@ -131,20 +129,17 @@ In this investigation, you'll set up your Linux Server VM to forward requests to
 
 ### Part 1: Enabling System-Level Forwarding on Your Linux Server
 
-(Image:Ops705_lab4_ip_forwarding.png - Figure 6: The */etc/sysctl.conf* file with IP forwarding added.)
-
 1. Remote SSH into your Linux Server VM.
 1. Elevate to root.
 1. Use vim to open **/etc/sysctl.conf**
 1. Add the line: `net.ipv4.ip_forward = 1` (Make sure it's a new line, and that it **doesn't** start with a *1.* symbol.)
+    ![Image: Enabling IP Forwarding](/img/ip-forwarding.png)
 1. Save and quit vim.
 1. At the command prompt, run: `sysctl -p`
 1. Confirm you've properly enabled system-level forwarding with the following command: `sysctl net.ipv4.ip_forward`
 1. The response from the command above should say **net.ipv4.ip_forward = 1**. If not, revisit the steps in Part 2.
 
 ### Part 2: Port Forwarding Using NAT
-
-(Image:Ops705_lab4_port_forwarding.png - Figure 7: View of the NAT tables with our port forwarding rules added.)
 
 1. Remote into your Windows Server VM, open Command Prompt, and run `ipconfig` Write down the 10.x.x.x IP address displayed.
 1. Remote SSH into your Linux Server VM, and elevate to root.
@@ -153,6 +148,7 @@ In this investigation, you'll set up your Linux Server VM to forward requests to
 1. Set up a port forwarding rule so all requests to sent your Linux VM on port 8080 get forwarded to your Windows VM on port 80. Run the following: `iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination *windows-server-ip-from-step-1*:80`
 1. Set up NAT for all forwarded traffic: `iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE`
 1. Confirm your new NAT table rules with the command from Step 4.
+    ![Image: Confirming NAT tables with port forwarding](/img/nat-tables.png)
 1. Once confirmed, save your updated rules!
 
 ### Part 3: Adding Forwarding Firewall Rule Exceptions
@@ -160,6 +156,8 @@ In this investigation, you'll set up your Linux Server VM to forward requests to
 (Image:Ops705_lab4_forward_rules.png - Figure 8: View of the default tables with our IP forwarding rules added.)
 1. Create a firewall rule to allow forwarded traffic destined for TCP port 80: `iptables -A FORWARD -p tcp --dport 80 -j ACCEPT`
 1. Create a firewall rule to allow forwarded traffic sent from TCP port 80: `iptables -A FORWARD -p tcp --sport 80 -j ACCEPT`
+1. Confirm your new forward rules: `iptables -nvL --line`
+    ![Image: Confirming port 80 forward rules](/img/forward-80.png)
 1. Watch your firewall rules and their packet counters with the following command: `watch iptables -nvL --line`
 1. In a browser on your **local computer**, paste the URL for your Linux VM, adding **:8080** to the end of the address, then hit Enter. (Make sure you aren't using https!)
 1. If you've done your work right, the Windows IIS web page should appear!
