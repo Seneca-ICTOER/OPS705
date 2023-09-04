@@ -400,11 +400,6 @@ Make sure to follow this method during *Investigation 2* and *Investigation 3*.
 
 (Image:Ops705_sshd_listenport_custom.png - Figure 10: Setting the custom listen port for SSHd.)
 
-1. From the command line, run the following (it will take a few minutes):
-
-    ```bash
-    sudo semanage port -a -t ssh_port_t -p tcp 22222
-    ```
 
 1. Using vim, open the SSH configuration file:
 
@@ -427,7 +422,13 @@ Make sure to follow this method during *Investigation 2* and *Investigation 3*.
     systemctl status -l sshd
     ```
 
-    **WARNING: If the status is in a *Failed* state, retrace your steps. Look back at the SSHd config file for typos. Redo the last two steps to apply additional changes.**
+    **WARNING: If the status is in a *Failed* state, retrace your steps.**
+    
+    * Look back at the SSHd config file for typos.
+    * Did you forget to run the `semanage` command from Investigation 3, Part 2?
+
+    Restart the SSHd service to apply additional changes **and check its status again.**
+
 1. If the status is **active (running)**, move onto the next step.
 1. In your **test terminal**, disconnect from your SSH connection and reconnect **using the new port 22222**. 
 
