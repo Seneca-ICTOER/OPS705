@@ -141,7 +141,7 @@ To log out of root and drop back down to your regular user, run: `exit`
 ### Part 2: Update CentOS
 As mentioned in the Week 2 lecture, keeping your Linux system up to date is an incredibly important task and must be done regularly. You are the administrator of this system, you must keep it running well. While updating is a graded part of this lab, you should run the command again regularly to check for new updates while you continue to work with this virtual machine over the next several weeks.
 
-(Image:Ops705_lab2_fig3.png - Figure 3: A yum update in progress.)
+![Image: Yum update in progress](/img/yum-update.png)
 
 Run the command to update CentOS:
 
@@ -213,7 +213,10 @@ As we are going to run several admin-level commands, we will log in as root for 
     iptables -L -vn --line-numbers
     ```
 
-1. Refer to *Figure 5*. If your rules at this stage look different, stop and contact your professor for help. (Values in the **pkts** and **bytes** column may vary.)
+1. Refer to the example image below. If your rules at this stage look different, stop and contact your professor for help. (Values in the **pkts** and **bytes** column may vary.)
+
+    ![Image: Default firewall rules](/img/default-iptables.png)
+
 1. Set the *iptables* firewall to start with the system:
 
     ```bash
@@ -227,6 +230,8 @@ As we are going to run several admin-level commands, we will log in as root for 
     ```
 
  * (**Note:** If you don't remove *firewalld* and both firewalls are set to start with the system, *firewalld* will always start instead of iptables. This can lead to much frustration. Make sure you remove it!)
+
+ ![Image: Status of both firewalls](/img/firewall-status.png)
 
 ### Part 2: Securing Your Firewall
 There are a few standard security practices to follow when dealing with firewalls. In this section, we will changes our firewall rules to follow those practices. For more detail, refer to the Week 2 lecture and material.
@@ -257,11 +262,13 @@ There are a few standard security practices to follow when dealing with firewall
     iptables -D FORWARD 1
     ```
 
-1. Verify your changes by running the list rules command again (Refer to *Fig. 6* as a reference):
+1. Verify your changes by running the list rules command again (refer to the image below to confirm):
 
     ```bash
     iptables -nvL --line
     ```
+
+    ![Image: Modified firewall rules](/img/modified-iptables.png)
 
 1. To confirm you haven't locked yourself out, log out of SSH and log back in. If you don't encounter any login issues, you're good to go.
 
@@ -372,6 +379,8 @@ As mentioned, we want to change what port the system uses to allow incoming SSH 
     sudo iptables -nvL --line
     ```
 
+    ![Image: Custom SSH firewall rule](/img/custom-ssh-firewall-rule.png)
+
 1. If it has, save your new rules: 
 
     ```bash
@@ -409,6 +418,9 @@ Make sure to follow this method during *Investigation 2* and *Investigation 3*.
 
 1. Find the line (near the top) containing the words: `Port 22`
 1. Change this line to read: ``Port 22222``
+
+    ![Image: Changing SSH Listen Port](/img/custom-listen-sshd.png)
+
 1. Save and quit vim.
 1. Restart the sshd service:
 
@@ -445,12 +457,13 @@ Make sure to follow this method during *Investigation 2* and *Investigation 3*.
 
 ### Part 5: Using SSH Keypairs
 
-(Admon/caution - WARNING: Failure to follow the steps in Part 5 *properly and carefully* will result in losing access to your Linux VM.|If that happens, you’ll need to delete the VM and recreate it.)
+> **WARNING: Failure to follow the steps in Part 5 *properly and carefully* will result in losing access to your Linux VM.**
+>
+> If that happens, you’ll need to delete the VM and recreate it.
 
 In Part 5, you will generate an SSH keypair on your Linux VM, install them, and then copy your keys onto your personal computer to allow you to authenticate to your VM securely going forward when connecting.
 
 #### Switching to SSH keypair authentication:
-(Image:Ops705_filezilla-connect.png - Figure 11: Connection information for FileZilla using the custom port.)
 
 1. First, download and install the FileZilla Client software on your personal computer.
 1. On your Linux VM as a regular user, generate your SSH keypair (accept all defaults):
@@ -481,6 +494,8 @@ In Part 5, you will generate an SSH keypair on your Linux VM, install them, and 
         chmod 700 ~/.ssh; chmod 600 ~/.ssh/id_rsa
         ```
 
+    ![Image: FileZilla - Port 22222](/img/filezilla-connect.png)
+
 1. With a second terminal, verify that you can login to your VM's SSH from your personal computer without a password (keypair authentication). Do not move on to the next step until you’re sure.
 
     * Login the same way as before. **If you aren't asked for a password, then keypair authentication has succeeded.**
@@ -506,8 +521,6 @@ In this section, you will add your professor's public key to allow them to log i
 
 #### Disabling SSH password authentication:
 
-(Image:Ops705_sshd_passauth_no.png - Figure 12: Disabling password-based authentication in SSHd.)
-
 1. Make sure you have two SSH separate terminals connected to you Azure Linux VM.
 1. In your control terminal, use `vim` to open the SSH configuration file:
 
@@ -520,6 +533,8 @@ In this section, you will add your professor's public key to allow them to log i
     ```text
     PasswordAuthentication no
     ```
+    ![Image: Disabling Password Authentication](/img/disable-passauth.png)
+
 
 1. Save and quit vim.
 1. Restart the sshd service:
@@ -565,6 +580,9 @@ Perform the following steps:
 1. Make sure you have the most recent lab files: `git pull`
 1. Change back to your home directory: `cd ~`
 1. Run the checking script for your Linux work in this lab: `labcheck2.sh`
+
+    ![Image: LabCheck 2 Script Example](/img/labcheck2.png)
+
 1. **If you encounter errors:**
     * Review the feedback.
     * Make the necessary corrections.
@@ -588,6 +606,9 @@ Updating your Windows Server VM in Azure is a little bit easier. It takes advant
     1. Firefox
     1. Windows Firewall operations – Enable ICMP (Ping)
     1. Installs the latest Windows Updates
+
+    ![Image: Lab 2 - Windows Artifacts](/img/lab2-artifacts.png)
+
 1. You'll be returned to the *Add artifacts* window. Simply click **OK** to install them.
 1. The *Manage Artifacts* window will return, and a new entry for each artifact will appear. Their statuses will cycle through *Pending*, *Installing*, and finally *Succeeded*.
 1. When all artifacts are in a *Succeeded* state, move to Part 2. (This may take 10-20 minutes.)
