@@ -1,11 +1,11 @@
 ---
 id: lab2
-title: Lab 2
+title: Azure Lab 2
 sidebar_position: 2
-description: Lab 2 - Securing Your Virtual Machines
+description: Azure Lab 2 - Securing Your Virtual Machines
 ---
 
-# Lab 2: Securing Your Virtual Machines
+# Azure Lab 2: Securing Your Virtual Machines
 
 ## Lab Preparation
 

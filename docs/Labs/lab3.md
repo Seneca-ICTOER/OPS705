@@ -1,11 +1,11 @@
 ---
 id: lab3
-title: Lab 3
+title: Azure Lab 3
 sidebar_position: 3
-description: Lab 3 - Linux and the Command Line Interface (CLI)
+description: Azure Lab 3 - Linux and the Command Line Interface (CLI)
 ---
 
-# Lab 3: Linux and the Command Line Interface
+# Azure Lab 3: Linux and the Command Line Interface
 
 ## Lab Preparation
 
