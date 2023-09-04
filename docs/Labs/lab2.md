@@ -141,13 +141,13 @@ To log out of root and drop back down to your regular user, run: `exit`
 ### Part 2: Update CentOS
 As mentioned in the Week 2 lecture, keeping your Linux system up to date is an incredibly important task and must be done regularly. You are the administrator of this system, you must keep it running well. While updating is a graded part of this lab, you should run the command again regularly to check for new updates while you continue to work with this virtual machine over the next several weeks.
 
-![Image: Yum update in progress](/img/yum-update.png)
-
 Run the command to update CentOS:
 
 ```bash
 sudo yum update
 ```
+
+![Image: Yum update in progress](/img/yum-update.png)
 
 Running this as a regular user will give you an error, which is why you temporarily elevate your privileges for the duration of a command with sudo.
 
@@ -169,8 +169,6 @@ It may take a few minutes for the VM to restart. You can track its progress thro
 In this investigation, you'll replace the default firewall with another and follow security best practices in constructing your firewall rules.
 
 ### Part 1: Replacing *firewalld* with *iptables*
-(Image:Ops705_lab2_fig16.png - Figure 4: Service status of both firewalls.)
-(Image:Ops705_lab2_fig4.png - Figure 5: Default iptables firewall rules.)
 
 The default firewall for CentOS, *firewalld* is more complex than we need. We'll be reverting to the easier to use *iptables* standard. This will require the removal of the *firewalld* package, the installation of the *iptables-services* package, and working with systemd services to turn on your new firewall.
 
@@ -235,8 +233,6 @@ As we are going to run several admin-level commands, we will log in as root for 
 
 ### Part 2: Securing Your Firewall
 There are a few standard security practices to follow when dealing with firewalls. In this section, we will changes our firewall rules to follow those practices. For more detail, refer to the Week 2 lecture and material.
-
-(Image:Ops705_lab2_fig15.png - Figure 6: Modified iptables firewall rules.)
 
 1. Set your default policy for the INPUT chain to DROP:
 
@@ -560,8 +556,6 @@ In this section, you will add your professor's public key to allow them to log i
 
 ## Investigation 4: Confirming Your Linux Work
 
-(Image:script-check-lab2.png - If all checks pass, then user performed task correctly and can continue.)
-
 ### Running a Shell Script to Check Your Work
 
 Although you have been double-checking your work (right?), you *might* have made some mistakes.
@@ -593,8 +587,6 @@ Perform the following steps:
 Updating your Windows Server VM in Azure is a little bit easier. It takes advantage of the cloud infrastructure to allow point-and-click updates.
 
 ### Part 1: Updating Windows with Artifacts
-
-(Image:Ops705_artifacts1.jpg - Figure 13: Adding artifacts to your Windows VM in Azure.)
 
 1. Spin up your Windows Server VM, and wait until it's fully started up.
 1. In the Azure blade for your Windows Server VM, click on the **Manage artifacts** item in the menu bar to the left.
