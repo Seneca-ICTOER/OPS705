@@ -73,8 +73,6 @@ In this section, you will follow security best practices to allow web server tra
 
 ### Part 3: Editing Your Apache Website
 
-(Image:Ops705_lab4_linux_html_code.png - Figure 3: Code example of index.html.)
-
 Finally, let's modify the main page. Currently, it's displaying the default Apache splash page. Let's change that.
 
 1. Navigate to: `/var/www/html`
@@ -112,6 +110,7 @@ Setting up an Internet Information Services web server on an Azure VM is incredi
 
 1. Spin up your Windows Server VM, and wait until it's fully started up.
 1. In the Azure blade for your Windows Server VM, add and apply the **Internet Information Services (IIS)** artifact.
+    ![Image: Adding IIS Artifact](/img/iis-artifact.png)
 1. When complete, open a browser inside the Windows Server VM, and navigate to `http://localhost`. You should see the IIS default splash page. Congratulations!
 
 ### Part 2: Editing Your IIS Website
