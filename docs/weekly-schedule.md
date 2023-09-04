@@ -7,6 +7,8 @@ description: Weekly Schedule for OP705
 
 # Weekly Schedule
 
+**Please note:** The weekly due dates for labs are *soft due dates*. You should aim to have labs completed by these dates to keep on top of the course and prepare for the relevant quizzes. ***The hard deadline (without penalty) for Labs 1-4 is Friday, October 20, 2023***.
+
 ## Week 1: Sept. 4-10
 
 | Topics or Skill | Reading | Assessment Due | Weight |
@@ -69,6 +71,8 @@ description: Weekly Schedule for OP705
  No classes this week. Campus is open. 
 
 ---
+
+**The hard deadline for all AWS Labs is *Friday, December 8, 2023*.**
 
 ## Week 8: Oct. 30 - Nov. 5
 
