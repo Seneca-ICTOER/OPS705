@@ -43,7 +43,6 @@ In this investigation, you'll install the Apache web server package from a Linux
 1. In a browser on your **local computer**, copy and paste the address for your Linux VM. It doesn't load, does it? We're not done. Move to **Part 2** to deal with the firewall.
 
 ### Part 2: Allowing Web Traffic
-(Image:Ops705_lab4_httpd_rules.png - Figure 2: New HTTP rule added to our firewall.)
 
 In this section, you will follow security best practices to allow web server traffic into your VM. We'll open a firewall exception to allow requests to our web server through, so we can access our new web server from the Internet.
 
@@ -153,7 +152,6 @@ In this investigation, you'll set up your Linux Server VM to forward requests to
 
 ### Part 3: Adding Forwarding Firewall Rule Exceptions
 
-(Image:Ops705_lab4_forward_rules.png - Figure 8: View of the default tables with our IP forwarding rules added.)
 1. Create a firewall rule to allow forwarded traffic destined for TCP port 80: `iptables -A FORWARD -p tcp --dport 80 -j ACCEPT`
 1. Create a firewall rule to allow forwarded traffic sent from TCP port 80: `iptables -A FORWARD -p tcp --sport 80 -j ACCEPT`
 1. Confirm your new forward rules: `iptables -nvL --line`

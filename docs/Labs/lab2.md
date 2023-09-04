@@ -94,8 +94,6 @@ We can run administration-level commands by using **sudo**. Sudo allows you to r
 
 Normally, the shell environment will ask you for your account password as an extra security precaution when using sudo. However, cloud-based Linux VMs typically have *password-less sudo access*. The idea is that identity management and security is handled by the cloud infrastructure. We'll explore that in detail later in the course.
 
-(Image:Ops705_lab2_fig1.png - Figure 1: Example commands with sudo.)
-
 Run the following commands:
 1. ```bash
     whoami
@@ -122,7 +120,6 @@ sudo su -
 
 Notice that your command prompt has immediately changed. It no longer prints out your username at the beginning of each line, but the name of the **root** account. This is a good visual aid to let you know how you're logged in.
 
-[[Image:Ops705_lab2_fig2.png|thumb|right|350px|Figure 2: Example commands as root.]]
 Run the same commands from the sudo subsection:
 1. ```bash
     whoami
@@ -281,7 +278,6 @@ There are a few standard security practices to follow when dealing with firewall
 In this investigation, you will be editing configuration text files to change the port the SSH service listens on. You will be using the **vim** utility to make some of these changes.
 
 ### Part 1: Text Editing with `vim`
-(Image:vi-text-editor-2.png - Figure 7: The online vi-tutorial provides users "hands-on" experience of using the vi text editor.)
 
 You will now learn basic editing skills using the vi (vim) text editor including creating, editing, and saving text files. As mentioned, the vim text editor (although taking longer to learn) has outstanding features to increase coding productivity.
 
@@ -304,8 +300,6 @@ An interactive tutorial has been created to give you "hands-on" experience on ho
 1. When you have completed that section, you will be returned to the main menu.
 1. If you want to get extra practice, you can select the menu item labelled "REVIEW EXERCISE".
 1. When you want to exit the tutorial, select the menu option to exit the tutorial.
-
-(Image:vi-text-editor-b.png - Figure 8: Contents of *othertext.txt*)
 
 After you have completed the tutorial:
 1. Using `vim`, create a new text file called *othertext.txt* in your home directory with these two commands one at a time:
@@ -354,7 +348,6 @@ The default is port **22**, we will be changing it to **22222**.
     ```
 
 ### Part 3: Adding a Firewall Rule for the Custom SSH Port
-(Image:Ops705_sshd_custom_rule.png - Figure 9: Adding a firewall rule for our new SSH custom port.)
 
 As mentioned, we want to change what port the system uses to allow incoming SSH connections. To do that, we have to add an extra rule to our firewall to allow it through:
 1. Review your current rules for reference:
@@ -402,9 +395,6 @@ Whenever you are modifying any of these (as you will below), you should use the 
 Make sure to follow this method during *Investigation 2* and *Investigation 3*.
 
 #### SSH Listen Port
-
-(Image:Ops705_sshd_listenport_custom.png - Figure 10: Setting the custom listen port for SSHd.)
-
 
 1. Using vim, open the SSH configuration file:
 
