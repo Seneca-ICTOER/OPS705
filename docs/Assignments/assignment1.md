@@ -64,24 +64,24 @@ Install apache on your new VM as you have in previous labs. Use default port 80 
 Now that you're logged in, you have to create a separate user and database for Wordpress.
 1. Create the new database: 
 
-    ```bash
+    ```sql
     CREATE DATABASE wordpress;
     ````
 1. Create the new user: 
 
-    ```bash
+    ```sql
     CREATE USER wordpressadmin@localhost IDENTIFIED BY 'password';
     ```
     (Change the password to something else!)
 1. Give your new user privileges to that database: 
 
-    ```bash
+    ```sql
     GRANT ALL PRIVILEGES ON wordpress.* TO wordpressadmin@localhost IDENTIFIED BY 'password';
     ```
 
 1. Tell MariaDB to reload privileges: 
 
-    ```bash
+    ```dql
     FLUSH PRIVILEGES;
     ```
 
