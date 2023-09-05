@@ -74,10 +74,10 @@ To install WordPress, you'll need to download the zip file from online, unzip it
 Paste the URL hostname of your VM into a browser on your local machine. You should see the WordPress database connector page. Use *localhost* as your **Database Host**.
 
 During Wordpress setup, after the database connection page, use the following values:
-* **Site Title:** <Full Name>'s Assignment 1
-* **Username:** <senecausername>
-* **Password:** <insertpassword>
-* **Your Email:** <senecaemailaddress>
+* **Site Title:** *Full Name*'s Assignment 1
+* **Username:** *senecausername*
+* **Password:** *insertpassword*
+* **Your Email:** *senecaemailaddress*
 
 When you've finished the installation, go back to your CLI and run: `setenforce 1`
 
