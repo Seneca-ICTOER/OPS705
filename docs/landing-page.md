@@ -10,44 +10,39 @@ description: Landing Home Page for OPS705
 
 ## What This Course is About
 
-This course is the second in a series of courses about Linux technologies
+Over the last several years, infrastructure and applications have become more and more reliant on operating in the cloud. These days, you're more likely to develop a responsive web application directly on cloud services instead of locally. This course will introduce you to the basic concepts of working and developing in and for the cloud.
 
-  - ULI101 taught you to be a Linux _user_. **In OPS245, you will move from being a Linux _user_ to being a Linux system _administrator_.**
-  - As a system administrator, you will be responsible for installing, configuring, adjusting, maintaining, and troubleshooting the operation of computer systems. This is a lot of responsibility, and with that responsibility comes power. You will be able to change anything on the system, and you will also have the ability to damage or destroy the system.
-  - In addition to manually configuring machines, you will learn to use bash and Python to automate some configuration tasks. Although this course will not cover the full features of either language, it will serve as an introduction to scripting and automation to make you a more capable and efficient system administrator.
-  - In this course you use an external SSD drive (USB 3) with the lab computers to set up a Linux system. You will also set up at least four additional Linux systems using "Virtual Machines", and therefore gain experience with different types of system configurations as well as setting up networking between systems.
-  - The next course in the OPS stream (OPS345) will expand on what you learn here and teach you to administer Linux servers (web servers, DNS servers, FTP servers, file sharing servers) -- and to use more complex Python scripting to boost your system administration efficiency.
+
+  - You will play the part of a system administrator, responsible for installing, configuring, adjusting, maintaining, and troubleshooting the operation of a development environment. This is a lot of responsibility, and with that responsibility comes power. You will be able to change anything on the system, and you will also have the ability to damage or destroy the system.
+  - You will learn how to develop and deploy applications on various cloud environments, from a simple container-like setup with a few clicks to a complicated multi-server application with database support.
+  - This course will give you hands-on experience with two major cloud computing services: **Microsoft Azure** and **Amazon Web Services (AWS)**.
 
 ## Learning by Doing
 
-Most of the learning in this course occurs through the hands-on problem solving that takes place in the eight labs and two assignments.
+Most of the learning in this course occurs through the hands-on problem solving that takes place in the assigned labs and two assignments.
 
 **Requirements for Success:**
 
-  - It is very important to stay up-to-date with the coursework, and to practice until you have confidently mastered each task.
-  - All of the software used in this course is _open source_ software, so you are free to use, modify, and redistribute it. This means that you can install it as many times as you want on as many different computers as you would like. It also means that you can tinker with it -- you can take it apart, see how it works, and put it back together in the same or a different way, limited only by your time and ambition. You are encouraged to experiment and question liberally.
-  - The notes that you make during the labs and assignments are your reference material for the quizzes, tests, and assignments. Take really good notes, and if you have questions, experiment and consult with your professor.
-  - Carefully read ALL lab instructions and check your work regularly. The labs have been designed with backup safeguards to prevent the student from losing their work. On the other hand, students may lose their work if they fail to follow lab instructions or accidentally forget their removable hard disks in the workstation's hard disk bay drive!
+  - **It is very important to stay up-to-date with the coursework, and to practice until you have confidently mastered each task.**
+  - All of the software used in this course is _open source_ software where possible, so you are free to use, modify, and redistribute it. This means that you can install it as many times as you want on as many different computers as you would like. It also means that you can tinker with it -- you can take it apart, see how it works, and put it back together in the same or a different way, limited only by your time and ambition. You are encouraged to experiment and question liberally.
+  - **The notes that you make during the labs and assignments are your reference material for the quizzes, tests, and assignments.** Take really good notes, and if you have questions, experiment and consult with your professor.
+  - **Carefully read ALL lab instructions and check your work regularly.** The labs have been designed to give you hands-on experience and are built with step-by-step instructions. Don't skip instructions, but also be careful not to coast through a lab.
+  - **Take the time to *understand* what the lab instructions are asking you to do.** These labs are a learning tool, not just a way to get marks in the course.
 
 ## Required Materials
 
-1. **Solid State Drive (SSD)	Minimum Capacity:** 240 GB
-2. **CentOS 7 Full Install DVD Image**
+1. **Your Seneca-based Credentials** (username and password).
+3. **USB Flash Drive** and/or **Secure Online Storage** for document and key backups.
+4. [OPS705 Lab Logbook - Azure](/files/azure-logbook.docx) A downloadable Word document. This should be filled out as you complete a lab. You can print this out and bring it to all quizzes and tests.
 
-      - [Download at Seneca Lab](https://mirror.senecacollege.ca/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-2009.iso)
-      - [Download from Home](https://mirror.netflash.net/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64-DVD-2009.iso)
-
-3. **USB Flash Drive** (3.0 preferred)	**Minimum Capacity:** 16 GB
-4. **Lab Logbook** (download & print Both sides per lab permitted)
-
-      - Download Doc
+ 
       - **NOTE: If you've taken this class in a previous semester, you MAY NOT bring that version of the lab logbook to any testing.**
 
 **Evaluation:**
 
 | **Evaluation** | **Marks** |
 | --- | --- |
-| Labs and Quizzes | 25% |
-| Assignments (minimum of 2) | 30% |
-| Tests (minimum of 1) | 20% |
-| Final Assessment | 25% |
+| Labs (minimum of 6)  | 20% |
+| Assignments (2 at 10% each) | 20% |
+| Quizzes (best 6 out of 6 or more quizzes) | 30% |
+| Tests (2 at 15% each) | 30% |
