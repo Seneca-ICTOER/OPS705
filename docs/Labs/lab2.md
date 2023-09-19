@@ -309,8 +309,11 @@ After you have completed the tutorial:
     vim othertext.txt
     ```
 
-1. Write the text shown in *Figure 8* to your new *othertext.txt* file, save, and quit.
-1. Confirm the contents of your text file match *Figure 8*:
+1. Write the text shown in the image below to your new *othertext.txt* file, save, and quit.
+
+    ![Image: othertext.txt](/img/vi-text-editor-b.png)
+
+1. Confirm the contents of your text file match the image above:
 
     ```bash
     cat othertext.txt
