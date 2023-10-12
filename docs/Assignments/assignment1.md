@@ -35,6 +35,7 @@ All other options, set up as you did with your previous Azure Linux VM.
 ### Post-Installation Setup
 1. Fully update the system.
 1. Only allow public-key authentication.
+1. SSH must only listen on port 22222.
 1. Install the prof key into your new VM under your regular user.
 
 ## Apache Configuration
