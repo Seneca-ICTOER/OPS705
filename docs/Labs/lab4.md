@@ -130,34 +130,69 @@ In this investigation, you'll set up your Linux Server VM to forward requests to
 
 1. Remote SSH into your Linux Server VM.
 1. Elevate to root.
-1. Use vim to open **/etc/sysctl.conf**
+1. Use vim to open: **/etc/sysctl.conf**
 1. Add the line: `net.ipv4.ip_forward = 1` (Make sure it's a new line, and that it **doesn't** start with a *1.* symbol.)
     ![Image: Enabling IP Forwarding](/img/ip-forwarding.png)
 1. Save and quit vim.
-1. At the command prompt, run: `sysctl -p`
-1. Confirm you've properly enabled system-level forwarding with the following command: `sysctl net.ipv4.ip_forward`
+1. At the command prompt, run: 
+    ```bash
+    sysctl -p
+    ```
+1. Confirm you've properly enabled system-level forwarding with the following command:
+    ```bash
+    sysctl net.ipv4.ip_forward
+    ``````
 1. The response from the command above should say **net.ipv4.ip_forward = 1**. If not, revisit the steps in Part 2.
 
 ### Part 2: Port Forwarding Using NAT
 
-1. Remote into your Windows Server VM, open Command Prompt, and run `ipconfig` Write down the 10.x.x.x IP address displayed.
+1. Remote into your Windows Server VM, open Command Prompt, and run
+    ```bash
+    ipconfig
+    ``````
+1. Write down the 10.x.x.x IP address displayed.
 1. Remote SSH into your Linux Server VM, and elevate to root.
-1. Confirm you can access the IIS web server on your Linux VM by running: `curl **IP-address-from-step-1**` If you see plain HTML code displayed, move to the next step.
-1. We're going to be working with the NAT table. Let's look at the NAT rules listing with the following command: `iptables -t nat -nvL --line`
-1. Set up a port forwarding rule so all requests to sent your Linux VM on port 8080 get forwarded to your Windows VM on port 80. Run the following: `iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination *windows-server-ip-from-step-1*:80`
-1. Set up NAT for all forwarded traffic: `iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE`
+1. Confirm you can access the IIS web server on your Linux VM by running:
+      ```bash
+      curl **IP-address-from-step-1**
+      ```
+1. If you see plain HTML code displayed, move to the next step.
+1. We're going to be working with the NAT table. Let's look at the NAT rules listing with the following command:
+    ```bash
+    iptables -t nat -nvL --line
+    ```
+1. Set up a port forwarding rule so all requests to sent your Linux VM on port 8080 get forwarded to your Windows VM on port 80. Run the following:
+    ```bash
+    iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination *windows-server-ip-from-step-1*:80
+    ```
+1. Set up NAT for all forwarded traffic:
+    ```bash
+    iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+    ```
 1. Confirm your new NAT table rules with the command from Step 4.
     ![Image: Confirming NAT tables with port forwarding](/img/nat-tables.png)
 1. Once confirmed, save your updated rules!
 
 ### Part 3: Adding Forwarding Firewall Rule Exceptions
 
-1. Create a firewall rule to allow forwarded traffic destined for TCP port 80: `iptables -A FORWARD -p tcp --dport 80 -j ACCEPT`
-1. Create a firewall rule to allow forwarded traffic sent from TCP port 80: `iptables -A FORWARD -p tcp --sport 80 -j ACCEPT`
-1. Confirm your new forward rules: `iptables -nvL --line`
+1. Create a firewall rule to allow forwarded traffic destined for TCP port 80:
+    ```bash
+    iptables -A FORWARD -p tcp --dport 80 -j ACCEPT
+    ```
+1. Create a firewall rule to allow forwarded traffic sent from TCP port 80:
+    ```bash
+    iptables -A FORWARD -p tcp --sport 80 -j ACCEPT
+    ```
+1. Confirm your new forward rules:
+    ```bash
+    iptables -nvL --line
+    ```
     ![Image: Confirming port 80 forward rules](/img/forward-80.png)
 1. If correct, save your rules!
-1. Watch your firewall rules and their packet counters with the following command: `watch iptables -nvL --line`
+1. Watch your firewall rules and their packet counters with the following command:
+    ```bash
+    watch iptables -nvL --line
+    ```
 1. In a browser on your **local computer**, paste the URL for your Linux VM, adding **:8080** to the end of the address, then hit Enter. (Make sure you aren't using https!)
 1. If you've done your work right, the Windows IIS web page should appear!
 1. Review the packet count from your watch command in Step 3. Notice the new forward rules are working! Keep this in mind for troubleshooting.
