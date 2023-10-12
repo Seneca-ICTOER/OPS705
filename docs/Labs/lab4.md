@@ -135,10 +135,12 @@ In this investigation, you'll set up your Linux Server VM to forward requests to
     ![Image: Enabling IP Forwarding](/img/ip-forwarding.png)
 1. Save and quit vim.
 1. At the command prompt, run: 
+
     ```bash
     sysctl -p
     ```
 1. Confirm you've properly enabled system-level forwarding with the following command:
+
     ```bash
     sysctl net.ipv4.ip_forward
     ``````
@@ -147,25 +149,30 @@ In this investigation, you'll set up your Linux Server VM to forward requests to
 ### Part 2: Port Forwarding Using NAT
 
 1. Remote into your Windows Server VM, open Command Prompt, and run
+
     ```bash
     ipconfig
     ``````
 1. Write down the 10.x.x.x IP address displayed.
 1. Remote SSH into your Linux Server VM, and elevate to root.
 1. Confirm you can access the IIS web server on your Linux VM by running:
+
       ```bash
       curl **IP-address-from-step-1**
       ```
 1. If you see plain HTML code displayed, move to the next step.
 1. We're going to be working with the NAT table. Let's look at the NAT rules listing with the following command:
+
     ```bash
     iptables -t nat -nvL --line
     ```
 1. Set up a port forwarding rule so all requests to sent your Linux VM on port 8080 get forwarded to your Windows VM on port 80. Run the following:
+
     ```bash
     iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination *windows-server-ip-from-step-1*:80
     ```
 1. Set up NAT for all forwarded traffic:
+
     ```bash
     iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
     ```
@@ -176,20 +183,24 @@ In this investigation, you'll set up your Linux Server VM to forward requests to
 ### Part 3: Adding Forwarding Firewall Rule Exceptions
 
 1. Create a firewall rule to allow forwarded traffic destined for TCP port 80:
+
     ```bash
     iptables -A FORWARD -p tcp --dport 80 -j ACCEPT
     ```
 1. Create a firewall rule to allow forwarded traffic sent from TCP port 80:
+
     ```bash
     iptables -A FORWARD -p tcp --sport 80 -j ACCEPT
     ```
 1. Confirm your new forward rules:
+
     ```bash
     iptables -nvL --line
     ```
     ![Image: Confirming port 80 forward rules](/img/forward-80.png)
 1. If correct, save your rules!
 1. Watch your firewall rules and their packet counters with the following command:
+
     ```bash
     watch iptables -nvL --line
     ```
