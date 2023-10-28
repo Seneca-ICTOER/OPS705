@@ -32,8 +32,8 @@ Create a new VPC with the following settings:
 1. Leave all other settings on default
 
 Once created, modify this VPC (*Edit VPC Settings*) with the following actions:
-1. Enable DNS resolution: Checked
-1. Enable DNS hostnames: Checked
+1. Enable DNS resolution: **Checked**
+1. Enable DNS hostnames: **Checked**
 
 ### Subnets
 Create two private IPv4 subnets in this VPC:
@@ -164,6 +164,8 @@ Find the following lines and add the bolded values:
 1. define('SECURE_AUTH_SALT', **getenv('SECURE_AUTH_SALT')**);
 1. define('LOGGED_IN_SALT', **getenv('LOGGED_IN_SALT')**);
 1. define('NONCE_SALT', **getenv('NONCE_SALT')**);
+
+    ![Image: Adding database connector information to wp-config.php.](/img/a2_wp-config-example.png)
 
 ### Zip As New File and Rename - Local Computer
 1. Find the **wordpress** folder on your local computer.
