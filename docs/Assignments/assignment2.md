@@ -165,7 +165,8 @@ Find the following lines and add the bolded values:
 1. define('LOGGED_IN_SALT', **getenv('LOGGED_IN_SALT')**);
 1. define('NONCE_SALT', **getenv('NONCE_SALT')**);
 
-    ![Image: Adding database connector information to wp-config.php.](/img/a2_wp-config-example.png)
+![Image: Adding database connector information to wp-config.php.](/img/a2_wp-config-example.png)
+*Figure 1: Adding database connector information to wp-config.php.*
 
 ### Zip As New File and Rename - Local Computer
 1. Find the **wordpress** folder on your local computer.
