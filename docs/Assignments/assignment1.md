@@ -11,7 +11,7 @@ description: Assignment 1 - Installing WordPress On A VM
 
 Unlike labs, assignments have minimal instructions. You are given specifications on what the assignment needs, and you must rely on your previous work in the course. If the assignment doesn't have the command you need, you can find it in your labs. And don't be afraid to do a little research!
 
-Assignments in OPS705 are built as an assessment of your ability to meet the course objectives. As such, I'm unable to provide detailed help.
+Assignments in OPS705 are built as an assessment of your ability to meet the course objectives. As such, your professor is unable to provide detailed help.
 
 ## Objectives of Assignment 1
 
