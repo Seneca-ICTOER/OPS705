@@ -214,6 +214,9 @@ Before beginning this section, you will need two things:
 
 Hint: None of these values should have single quotes in them. (i.e. ')
 
+![Image: Adding database connector information, auth keys and salts to your Elastic Beanstalk application as static Environment Variables.](/img/a2_beanstalk-environment-variables-example.png)
+*Figure 2: Adding database connector information, auth keys and salts to your Elastic Beanstalk application as static **Environment Variables**.*
+
 #### Security
 1. Service role: **LabRole**
 1. EC2 key pair: **vockey**
