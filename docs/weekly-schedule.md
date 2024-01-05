@@ -7,9 +7,9 @@ description: Weekly Schedule for OP705
 
 # Weekly Schedule
 
-**Please note:** The weekly due dates for labs are *soft due dates*. You should aim to have labs completed by these dates to keep on top of the course and prepare for the relevant quizzes. ***The hard deadline (without penalty) for Azure Labs 1-4 is Friday, October 20, 2023***.
+**Please note:** The weekly due dates for labs are *soft due dates*. You should aim to have labs completed by these dates to keep on top of the course and prepare for the relevant quizzes. ***The hard deadline (without penalty) for Azure Labs 1-4 is Friday, February 23, 2024.***.
 
-## Week 1: Sept. 4-10
+## Week 1: Jan. 8-14
 
 | Topics or Skill | Reading | Assessment Due | Weight |
 | :--- | :--- | :--- | :--- |
@@ -18,7 +18,7 @@ description: Weekly Schedule for OP705
 | Cloud Computing Concepts |  |  |  |
 | Introduction to Microsoft Azure and Virtual Machines |  |  |  |
 
-## Week 2: Sept. 11-17
+## Week 2: Jan. 15-21
 
 | Topics or Skill | Reading | Assessment Due | Weight |
 | :--- | :--- | :--- | :--- |
@@ -27,7 +27,7 @@ description: Weekly Schedule for OP705
 | Updating CentOS |  |  |  |
 | Securing CentOS |  |  |  |
 
-## Week 3: Sept. 18-24
+## Week 3: Jan. 22-28
 
 | Topics or Skill | Reading | Assessment Due | Weight |
 | :--- | :--- | :--- | :--- |
@@ -36,7 +36,7 @@ description: Weekly Schedule for OP705
 | Working with Files |  |  |  |
 | Using System Utilities |  |  |  |
 
-## Week 4: Sept. 25 - Oct. 1
+## Week 4: Jan. 29 - Feb. 4
 
 | Topics or Skill | Reading | Assessment Due | Weight |
 | :--- | :--- | :--- | :--- |
@@ -45,21 +45,21 @@ description: Weekly Schedule for OP705
 | Intro to Networking |  |  |  |
 | Setting Up Application Firewalls Rules |  |  |  |
 
-## Week 5: Oct. 2-8
+## Week 5: Feb. 4-11
 
 | Topics or Skill | Reading | Assessment Due | Weight |
 | :--- | :--- | :--- | :--- |
 | Advanced Networking | Posted links and video lectures/Live demonstrations | Azure Lab 4 – Setting Up a Multi-VM Application Server Environment | 4% |
 | Assignment 1 Release and Review | Lecture slides | Quiz 4 | 3.75% |
 
-## Week 6: Oct. 9-15
+## Week 6: Feb 12-18
 
 | Topics or Skill | Reading | Assessment Due | Weight |
 | :--- | :--- | :--- | :--- |
 | Dedicated lab time and lab help (Work Week) | Posted links and video lectures/Live demonstrations |  |  |
 |  | Lecture slides |  |  |
 
-## Week 7: Oct. 16-22
+## Week 7: Feb. 19-25
 
 | Topics or Skill | Reading | Assessment Due | Weight |
 | :--- | :--- | :--- | :--- |
@@ -67,14 +67,14 @@ description: Weekly Schedule for OP705
 | Midterm Test (Oct. 19) |  | Assignment 1 (Oct. 20) | 10% |
 |  |  | Labs 1-4 (Oct. 20) |  |
 
-## Study Week: October 23 - 29
+## Study Week: Feb. 26 - March 3
  No classes this week. Campus is open. 
 
 ---
 
-**The hard deadline for all AWS Labs is *Friday, December 8, 2023*.**
+**The hard deadline for all AWS Labs is *Friday, April 19, 2024*.**
 
-## Week 8: Oct. 30 - Nov. 5
+## Week 8: March 4-10
 
 | Topics or Skill | Reading | Assessment Due | Weight |
 | :--- | :--- | :--- | :--- |
@@ -83,21 +83,21 @@ description: Weekly Schedule for OP705
 | Introduction to Amazon Web Services | AWS Module 4 |  |  |
 | AWS Cloud Security |  |  |  |
 
-## Week 9: Nov. 6-12
+## Week 9: March 11-17
 
 | Topics or Skill | Reading | Assessment Due | Weight |
 | :--- | :--- | :--- | :--- |
 | AWS Networking and Content Delivery | AWS Module 5 | AWS Lab 1 – Introduction to AWS IAM | 2% |
 |  |  | Quiz 5 | 3.75% |
 
-## Week 10: Nov. 13-19
+## Week 10: March 18-24
 
 | Topics or Skill | Reading | Assessment Due | Weight |
 | :--- | :--- | :--- | :--- |
 | AWS Compute | AWS Module 6 | AWS Lab 2 – Build your VPC and Launch a Web Server | 2% |
 |  |  | Quiz 6 | 3.75% |
 
-## Week 11: Nov. 20-26
+## Week 11: March 25-31
 
 | Topics or Skill | Reading | Assessment Due | Weight |
 | :--- | :--- | :--- | :--- |
@@ -106,24 +106,24 @@ description: Weekly Schedule for OP705
 |  |  | AWS Lab Activity 2: Elastic Beanstalk | 0.5% |
 |  |  | Quiz 7 | 3.75% |
 
-## Week 12: Nov. 27 - Dec. 3
+## Week 12: April 1-7
 
 | Topics or Skill | Reading | Assessment Due | Weight |
 | :--- | :--- | :--- | :--- |
 | AWS Storage | AWS Module 7 | AWS Lab 5 – Build a Database Server | 2% |
 |  |  | Quiz 8 | 3.75% |
 
-## Week 13: Dec. 4-10
+## Week 13: April 8-14
 
 | Topics or Skill | Reading | Assessment Due | Weight |
 | :--- | :--- | :--- | :--- |
 | Dedicated lab time and lab help (Work Week) | All previous material | AWS Lab 4 – Working with EBS | 2% |
 |  |  | Quiz 9 | 3.75% |
 
-## Week 14: Dec. 11-13
+## Week 14: April 15-19
 
 | Topics or Skill | Reading | Assessment Due | Weight |
 | :--- | :--- | :--- | :--- |
-| Final Test (TBD) | All previous material | Assignment 2 (Dec. 8) | 10% |
-|  |  | All AWS Labs (Dec. 8) | 15% |
-|  |  | Final Test (TBD) |  |
+| Final Test (April 19) | All previous material | Assignment 2 (April 19) | 10% |
+|  |  | All AWS Labs (April 19) | 15% |
+|  |  | Final Test (April 19) |  |
