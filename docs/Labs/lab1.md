@@ -111,7 +111,7 @@ To create your CentOS VM, follow the steps from *Investigation 2, Part 1*, but w
 1. **Virtual machine size:** Standard_B1s
 1. Click on the *Advanced Settings* tab.
 1. Under **IP address**, select *Public*.
-1. Click back to *Basic Settings.
+1. Click back to *Basic Settings*.
 1. Leave all other options as they are.
 1. Click **Create**!
 
