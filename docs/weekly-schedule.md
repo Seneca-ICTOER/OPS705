@@ -7,7 +7,7 @@ description: Weekly Schedule for OP705
 
 # Weekly Schedule
 
-**Please note:** The weekly due dates for labs are *soft due dates*. You should aim to have labs completed by these dates to keep on top of the course and prepare for the relevant quizzes. ***The hard deadline (without penalty) for Azure Labs 1-4 is Friday, February 23, 2024.***.
+**Please note:** The weekly due dates for labs are *soft due dates*. You should aim to have labs completed by these dates to keep on top of the course and prepare for the relevant quizzes. ***The hard deadline (without penalty) for Azure Labs 1-4 is Friday, February 23, 2024***.
 
 ## Week 1: Jan. 8-14
 
