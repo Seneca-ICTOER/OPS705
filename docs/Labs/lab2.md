@@ -596,7 +596,7 @@ Updating your Windows Server VM in Azure is a little bit easier. It takes advant
 
 1. You'll be returned to the *Add artifacts* window. Simply click **OK** to install them.
 1. The *Manage Artifacts* window will return, and a new entry for each artifact will appear. Their statuses will cycle through *Pending*, *Installing*, and finally *Succeeded*.
-1. When all artifacts are in a *Succeeded* state, move to Part 2. (This may take 10-20 minutes.)
+1. When all artifacts are in a *Succeeded* state, move to the next part of the lab. (This may take 10-20 minutes.)
 
 ## Lab Submission
 
