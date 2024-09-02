@@ -109,7 +109,7 @@ The *whoami* command responds by printing out your username. Notice how, by usin
 
 Sudo is the preferred method of running admin-level commands, especially when you only have one command to run, or just a few. Only run commands with sudo that require it. Remember, the root user can do **anything** on the system, including accidentally delete all files. Only use it when you need it.
 
-=== Logging Into Root ===
+### Logging Into Root
 To run administration-level commands, we can also log into the root admin account from our standard user. This is primarily done when a user knows they'll be running many admin-level commands during a session to complete a task.
 
 From your standard user, elevate to the root account with the following command:
