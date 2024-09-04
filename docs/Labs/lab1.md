@@ -41,15 +41,15 @@ Logging in after initial setup is quite easy.
 1. Complete 2FA authentication.
 1. Our classroom DevTest Lab will be in your recent list, or you can use the search bar to bring up DevTest Labs by looking for **OPS705**. (*DO NOT search for *Virtual Machines* in the search bar.* You will find yourself in the wrong area and things will not work.)
 
-## Investigation 2: Managing a Windows Server 2019 VM in Azure
-In this investigation, you'll create, configure, and manage a Windows Server 2019 Virtual Machine using Microsoft Azure and a pre-built image. This means no tedious and time-consuming Windows installation! You'll also login to the VM remotely, using Microsoft's Remote Desktop Protocol to share its desktop.
+## Investigation 2: Managing a Windows Server 2022 VM in Azure
+In this investigation, you'll create, configure, and manage a Windows Server 2022 Virtual Machine using Microsoft Azure and a pre-built image. This means no tedious and time-consuming Windows installation! You'll also login to the VM remotely, using Microsoft's Remote Desktop Protocol to share its desktop.
 
 ### Part 1: Creating A Windows VM From An Image
-To create your Windows Server 2019 Virtual machine, perform the following steps:
+To create your Windows Server 2022 Virtual machine, perform the following steps:
 1. Navigate to *DevTest Labs > OPS705 > My virtual machines*
 1. Click the **+ Add** button.
 1. Wait for the *Choose a base* listing to populate. This may take a few moments.
-1. Select the item titled **Windows Server 2019 Datacenter**. Be careful here! There are many other options.
+1. Select the item titled **Windows Server 2022 Datacenter**. Be careful here! There are many other options.
 1. A new blade, *Create lab resource* appears.
 
     ![Image: Azure - Create Lab Resource](/img/azure-vm-labresource.png)
@@ -95,13 +95,13 @@ This section is fairly simple. The one thing to never forget: Ensure your VM's s
 
 ![Image: Azure VM - Deallocated](/img/azure-deallocated.png)
 
-## Investigation 3: Managing a CentOS Linux VM in Azure
-In this investigation, we'll create, configure, and manage a CentOS Minimal Virtual Machine using Microsoft Azure. This is a command line only OS, so you'll be using SSH to remotely connect to the VM and issue basic commands. This VM will be used extensively in Lab 2.
+## Investigation 3: Managing an Ubuntu Linux VM in Azure
+In this investigation, we'll create, configure, and manage an Ubuntu Server Virtual Machine using Microsoft Azure. This is a command line only OS, so you'll be using SSH to remotely connect to the VM and issue basic commands. This VM will be used extensively in Lab 2.
 
-### Part 1: Creating A CentOS VM From An Image
-To create your CentOS VM, follow the steps from *Investigation 2, Part 1*, but with the following settings:
+### Part 1: Creating An Ubuntu VM From An Image
+To create your Ubuntu VM, follow the steps from *Investigation 2, Part 1*, but with the following settings:
 
-1. **Choose a base:** CentOS-based 7.9
+1. **Choose a base:** Ubuntu Server 24.04 LTS
 1. **Virtual machine name:** yourSenecaUsername-lnx
 1. **User name:** yourSenecaUsername
 1. **Authentication type:** Password
@@ -117,7 +117,7 @@ To create your CentOS VM, follow the steps from *Investigation 2, Part 1*, but w
 
 When deployment is complete, click on the new VM in *My virtual machines* to verify its status and find the VM's address. Write this down.
 
-### Part 2: Accessing Your CentOS VM Remotely Using SSH
+### Part 2: Accessing Your Ubuntu VM Remotely Using SSH
 We will be accessing our new Linux VM remotely using SSH.
 
 Requirements: An SSH Client
@@ -127,7 +127,7 @@ Requirements: An SSH Client
 In the *Overview* tab for the Virtual Machine created in Part 1, look for the **IP address or FQDN** entry. This is the address you will use to connect in this section. Write it down (Hover over the URL, and you'll see a *Copy to clipboard* icon).
 
 **On Windows Using Command Prompt, or macOS/Linux Using Terminal**:
-![Image: Windows Command Prompt - SSH Login to CentOS](/img/azure-cmdssh-login.png)
+![Image: Windows Command Prompt - SSH Login to Ubuntu](/img/azure-cmdssh-login.png)
 1. From the command line, enter the following (using your address from the *Overview* tab):
     ```bash
     ssh yourSenecaUsername@address
@@ -144,14 +144,9 @@ In the *Overview* tab for the Virtual Machine created in Part 1, look for the **
 1. To quit, type <code>exit</code>.
 
 ### Part 3: Downloading OPS705 Lab Files
-A number of files have been created for you that you need for the next several labs. These must be downloaded to your CentOS VM using the following steps:
-1. Install git: 
+A number of files have been created for you that you need for the next several labs. These must be downloaded to your Ubuntu VM using the following steps:
 
-    ```bash
-    sudo yum -y install git
-    ```
-
-1. Using git, download all lab files into your bin directory:
+1. Using git (which comes pre-installed), download all lab files into your bin directory:
 
     ```bash
     git clone https://github.com/ops705/labs.git ~/bin/
@@ -184,7 +179,7 @@ In this section, you will add your professor's public key to allow them to log i
 
 Compare the output. You should see the contents of **professorID.pub** in your **authorized_keys** file. (*WARNING: Do not delete any additional data in authorized_keys!*)
 
-### Part 5: Fully Stopping your CentOS VM
+### Part 5: Fully Stopping your Ubuntu VM
 As with the Windows Server VM, fully deallocating your VM is essential to responsible usage.
 
 1. Click on the **Stop** button at the top of the VM's Overview blade.
@@ -238,9 +233,9 @@ Your total allowed resource allocation has been restricted for this course. This
 Submit to Blackboard full-desktop screenshots (PNG/JPG) of the following:
 1. Your view of the OPS705 DevTest Labs Overview blade.
 1. The Azure *Overview* blade for your **Windows Server** VM.
-1. The Azure *Overview* blade for your **CentOS** VM.
+1. The Azure *Overview* blade for your **Ubuntu** VM.
 1. The text file created for your Windows VM, open in Notepad.
-1. Your CentOS remote SSH session after running the command: `hostnamectl`
-1. The list of lab files downloaded to your CentOS VM.
+1. Your Ubuntu remote SSH session after running the command: `hostnamectl`
+1. The list of lab files downloaded to your Ubuntu VM.
 
 **Reminder:** Make sure to fully stop your VMs when you're done!
