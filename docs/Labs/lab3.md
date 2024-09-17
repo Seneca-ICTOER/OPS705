@@ -12,7 +12,7 @@ description: Azure Lab 3 - Linux and the Command Line Interface (CLI)
 ### Purpose / Objectives of Lab 3
 Understanding how to use a command line interface (CLI) is an incredibly useful skill-set as application developers. It is present in all major operating systems, and is often how you will interact with tools and databases to accomplish tasks a GUI doesn't provide.
 
-In this lab, you will practice working with the Linux command line environment inside your Azure CentOS VM to:
+In this lab, you will practice working with the Linux command line environment inside your Azure Ubuntu VM to:
 1. Understand the purpose of **directories** and **directory pathnames**.
 1. Use common Linux commands to perform **directory management tasks**.
 1. Understand the difference between **absolute** , **relative** and **relative-to-home** pathnames
@@ -25,7 +25,7 @@ Before beginning, you must have:
 1. Successfully completed Lab 2.
 1. Attended the Week 3 class lecture.
 1. Read through the Week 3 slides, and have them handy as a reference for concepts.
-1. Your *username*-lnx CentOS VM in Azure.
+1. Your *username*-lnx Ubuntu VM in Azure.
 1. Your Seneca Azure login credentials.
 1. Your linked mobile device for 2FA.
 
@@ -47,7 +47,7 @@ There is actually a command called `tree` that displays a **directory tree diagr
 To install the `tree` command within Linux:
 
 ```bash
-sudo yum install tree
+sudo apt install tree
 ```
 
 ### Directory Pathnames
@@ -431,7 +431,7 @@ The best way to learn about different types of file pathnames is to use them whi
 In the following investigation (Parts 1-3), you will create the exact same directory structure each time, but using a different path type.
 
 First, let's confirm:
-1. Connect to your CentOS VM's CLI.
+1. Connect to your Ubuntu VM's CLI.
 1. Issue a command to confirm you are located in your **home** directory.
 
 In this investigation, you will create the blue sections of this tree diagram. 
