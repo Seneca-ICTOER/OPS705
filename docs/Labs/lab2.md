@@ -71,7 +71,7 @@ The two most readily-available command line text editors in Linux are **nano** a
 The nano text editor would seem like an easier-to-use text editor, but vi (although taking longer to learn) has outstanding features and allow the user to be more productive with editing text files.
 
 ## Investigation 1:  Update Linux
-This investigation simply has you update your CentOS installation. This includes operating system packages, as well as any other packages that have been installed using yum.
+This investigation simply has you update your Ubuntu installation. This includes operating system packages, as well as any other packages that have been installed using yum.
 
 ### Part 1: Privilege Escalation
 
@@ -81,7 +81,7 @@ To update the operating system, you'll need to have administrative access. There
 1. logging in to an admin account from your regular account
 1. running a command as your regular user with temporary admin powers
 
-We call this *privilege elevation* or *elevating your privileges*. Only regular user accounts that belong to the system's administrator group can do this. The name of the admin group changes depending on the distribution of Linux; for CentOS, it's the **wheel** group. The first user account you created as part of your VM installation was automatically added to this group as part of the Azure VM deployment process.
+We call this *privilege elevation* or *elevating your privileges*. Only regular user accounts that belong to the system's administrator group can do this. The name of the admin group changes depending on the distribution of Linux; for Ubuntu, it's the **sudo** group. The first user account you created as part of your VM installation was automatically added to this group as part of the Azure VM deployment process.
 
 Let's go through a few examples.
 
@@ -135,16 +135,16 @@ Notice that each command returns the output **root**. This is in contrast to usi
 
 To log out of root and drop back down to your regular user, run: `exit`
 
-### Part 2: Update CentOS
+### Part 2: Update Ubuntu
 As mentioned in the Week 2 lecture, keeping your Linux system up to date is an incredibly important task and must be done regularly. You are the administrator of this system, you must keep it running well. While updating is a graded part of this lab, you should run the command again regularly to check for new updates while you continue to work with this virtual machine over the next several weeks.
 
-Run the command to update CentOS:
+Run the command to update Ubuntu:
 
 ```bash
-sudo yum update
+sudo apt update && sudo apt upgrade
 ```
 
-![Image: Yum update in progress](/img/yum-update.png)
+![Image: apt update and upgrade in progress](/img/apt-update.png)
 
 Running this as a regular user will give you an error, which is why you temporarily elevate your privileges for the duration of a command with sudo.
 
@@ -160,16 +160,16 @@ The update command will look for updates, download the install files, and then u
 
 You'll be disconnected from your remote session as the SSH server inside your VM shuts down along with the rest of the system.
 
-It may take a few minutes for the VM to restart. You can track its progress through the Azure DTL Overview page. Once back up and running, log back in to confirm everything still works.
+It may take a few minutes for the VM to restart. You can track its progress through the Azure DTL *Overview* page. Once back up and running, log back in to confirm everything still works.
 
 ## Investigation 2: Configuring Your Firewall
 In this investigation, you'll replace the default firewall with another and follow security best practices in constructing your firewall rules.
 
-### Part 1: Replacing *firewalld* with *iptables*
+### Part 1: Replacing *ufw* with *iptables*
 
-The default firewall for CentOS, *firewalld* is more complex than we need. We'll be reverting to the easier to use *iptables* standard. This will require the removal of the *firewalld* package, the installation of the *iptables-services* package, and working with systemd services to turn on your new firewall.
+The default firewall for Ubuntu, *ufw* is more complex than we need. We'll be reverting to the easier to use *iptables* standard. This will require the removal of the *ufw* service, the installation of the *iptables-persistent* package, and working with systemd services to turn on your new firewall.
 
-**Make sure you follow these instructions in order. If you don't, you may be locked out of your Linux VM forever.** If you encounter errors on any step, stop and ask for help. Do not continue!
+**Make sure you follow these instructions in order. If you don't, you may be locked out of your Linux VM *forever*.** If you encounter errors on any step, stop and ask for help. Do not continue!
 
 As we are going to run several admin-level commands, we will log in as root for this section:
 1. From your regular user, elevate to the root account:
@@ -178,29 +178,19 @@ As we are going to run several admin-level commands, we will log in as root for 
     sudo su -
     ```
 
-1. Install the *iptables-services* firewall package:
+1. Install the *iptables-persistent* firewall package (this will automatically uninstall ufw):
 
     ```bash
-    yum install iptables-services
+    apt install iptables-persistent
     ```
 
-1. Stop the *firewalld* service and start the *iptables* service in a single, chained command:
+1. Check the status of the *iptables* service, which is called *netfilter-persistent*. It should tell you it's **active** and **enabled**: 
 
     ```bash
-    systemctl stop firewalld; systemctl start iptables
+    systemctl status -l netfilter-persistent
     ```
 
-1. Check the status of the *firewalld* service. It should tell you it's stopped:
-
-    ```bash
-    systemctl status -l firewalld
-    ```
-
-1. Check the status of the *iptables* service. It should tell you it's **active**: 
-
-    ```bash
-    systemctl status -l iptables
-    ```
+    ![Image: Firewall status](/img/firewall-status.png)
 
 1. View your current *iptables* firewall rules:
 
@@ -212,24 +202,44 @@ As we are going to run several admin-level commands, we will log in as root for 
 
     ![Image: Default firewall rules](/img/default-iptables.png)
 
-1. Set the *iptables* firewall to start with the system:
-
-    ```bash
-    systemctl enable iptables
-    ```
-
-1. Remove *firewalld* completely, including all unused files:
-
-    ```bash
-    yum autoremove firewalld
-    ```
-
- * (**Note:** If you don't remove *firewalld* and both firewalls are set to start with the system, *firewalld* will always start instead of iptables. This can lead to much frustration. Make sure you remove it!)
-
- ![Image: Status of both firewalls](/img/firewall-status.png)
-
 ### Part 2: Securing Your Firewall
 There are a few standard security practices to follow when dealing with firewalls. In this section, we will changes our firewall rules to follow those practices. For more detail, refer to the Week 2 lecture and material.
+
+Please remember, this is a **case-sensitive file system**. You must use the proper upper and lower case letters as noted below *exactly*.
+
+1. First, allow all RELATED,ESTABLISHED connections to automatically go through:
+
+    ```bash
+   iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+    ```
+
+1. Allow local VM communication (it can talk to itself):
+
+    ```bash
+    iptables -A INPUT -p all -i lo -j ACCEPT
+    ```
+
+1. Allow all incoming SSH connections (this is how you remotely login):
+    ```bash
+    iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+    ```
+
+1. Allow DNS resolution (necessary to turn a domain name like google.ca into an IP address):
+    ```bash
+    iptables -A INPUT -p udp --dport 53 -j ACCEPT
+    iptables -A INPUT -p tcp --dport 53 -j ACCEPT
+    ```
+
+1. Allow Azure DHCP for dynamic IP addressing:
+    ```bash
+    iptables -A INPUT -p udp --dport 67 -j ACCEPT
+    ```
+
+1. Add a rule to allow Azure to get status updates and control your VM from the web interface:
+    ```bash
+    iptables -A INPUT -s 168.63.129.16 -p tcp -j ACCEPT
+    iptables -A INPUT -s 169.254.169.254 -p tcp -j ACCEPT
+    ```
 
 1. Set your default policy for the INPUT chain to DROP:
 
@@ -237,22 +247,10 @@ There are a few standard security practices to follow when dealing with firewall
     iptables -P INPUT DROP
     ```
 
-1. Remove the reject rule from the INPUT chain to hide our server from scans:
-
-    ```bash
-    iptables -D INPUT 5
-    ```
-
 1. Set your default policy for the FORWARD chain to DROP:
 
     ```bash
     iptables -P FORWARD DROP
-    ```
-
-1. Remove the reject rule from the FORWARD chain to hide it from scans:
-
-    ```bash
-    iptables -D FORWARD 1
     ```
 
 1. Verify your changes by running the list rules command again (refer to the image below to confirm):
@@ -263,16 +261,16 @@ There are a few standard security practices to follow when dealing with firewall
 
     ![Image: Modified firewall rules](/img/modified-iptables.png)
 
-1. To confirm you haven't locked yourself out, log out of SSH and log back in. If you don't encounter any login issues, you're good to go.
+1. To confirm you haven't locked yourself out, log out of SSH and log back in. If you don't encounter any login issues, you're good to go. *If you do, contact me immediately.*
 
 1. **Assuming the step above works**, in your Linux VM, save your rule changes:
 
     ```bash
-    service iptables save
+    iptables-save > /etc/iptables/rules.v4
     ```
 
 1. Congratulations, you've secured your firewall!
-1. Drop back down to your regular user at this point, you never want to stay logged in as root: `exit`
+1. Drop back down to your regular user at this point. You never want to stay logged in as root long-term: `exit`
 
 ## Investigation 3: Securing SSH
 In this investigation, you will be editing configuration text files to change the port the SSH service listens on. You will be using the **vim** utility to make some of these changes.
@@ -289,7 +287,7 @@ The big thing to remember with vim is that it starts in **COMMAND** mode. You ne
 
 An interactive tutorial has been created to give you "hands-on" experience on how to use vi text editor. It is recommended that you run this interactive tutorial in your Linux account to learn how to create and edit text files with the vi text editor.
 
-1. Run the interactive tutorial from your CentOS command line:
+1. Run the interactive tutorial from your Ubuntu command line:
 
     ```bash
     vi-tutorial
@@ -339,20 +337,12 @@ Refer to the following table of Text File Management Commands:
 | diff file1 file2 | Displays differences between 2 files | `diff otherfile.txt otherfile2.txt` |
 | file | Gives info about the contents of the file (e.g. file with no extension). | `file othertext.txt` |
 
-### Part 2: Adding a Custom Port to SELinux
-**SELinux** is an extra security system that looks for unusual patterns of behaviour in programs. While SELinux is a large topic of its own, we will only work with it briefly here. In this part, we will tell SELinux it's alright for it to allow SSH connections on a custom port.
+### Part 2: Adding a Firewall Rule for the Custom SSH Port
+
+As mentioned, we want to change what port the system uses to allow incoming SSH connections. To do that, we have to add an extra rule to our firewall to allow it through:
 
 The default is port **22**, we will be changing it to **22222**.
 
-1. Run the following command (it will several seconds to complete):
-
-    ```bash
-    sudo semanage port -a -t ssh_port_t -p tcp 22222
-    ```
-
-### Part 3: Adding a Firewall Rule for the Custom SSH Port
-
-As mentioned, we want to change what port the system uses to allow incoming SSH connections. To do that, we have to add an extra rule to our firewall to allow it through:
 1. Review your current rules for reference:
 
     ```bash
@@ -376,12 +366,12 @@ As mentioned, we want to change what port the system uses to allow incoming SSH 
 1. If it has, save your new rules: 
 
     ```bash
-    sudo service iptables save
+    sudo iptables-save | sudo tee /etc/iptables/rules.v4
     ```
 
-### Part 4: Modifying the SSH Service Listen Port
+### Part 3: Modifying the SSH Service Listen Port
 
-(Admon/caution - WARNING: Failure to follow the steps in Part 4 *properly and carefully* will result in losing access to your Linux VM.|If that happens, you’ll need to delete the VM and recreate it.)
+(Admon/caution - WARNING: Failure to follow the steps in Part 3 *properly and carefully* will result in losing access to your Linux VM.|If that happens, you’ll need to delete the VM and recreate it.)
 
 In this section, you will change what port the SSH service listens on for new connections.
 
@@ -411,24 +401,30 @@ Make sure to follow this method during *Investigation 2* and *Investigation 3*.
     ![Image: Changing SSH Listen Port](/img/custom-listen-sshd.png)
 
 1. Save and quit vim.
-1. Restart the sshd service:
+1. Load the new settings into **systemctl** memory:
 
     ```bash
-    sudo systemctl restart sshd
+    sudo systemctl daemon-reload
+    ```
+
+1. Restart the **ssh** service:
+
+    ```bash
+    sudo systemctl restart ssh
     ```
 
 1. Check the status of the service:
 
     ```bash
-    systemctl status -l sshd
+    systemctl status -l ssh
     ```
 
     **WARNING: If the status is in a *Failed* state, retrace your steps.**
     
     * Look back at the SSHd config file for typos.
-    * Did you forget to run the `semanage` command from Investigation 3, Part 2?
+    * Did you forget to disable AppArmor from Investigation 3, Part 2?
 
-    Restart the SSHd service to apply additional changes **and check its status again.**
+    Restart the SSH service to apply additional changes **and check its status again.**
 
 1. If the status is **active (running)**, move onto the next step.
 1. In your **test terminal**, disconnect from your SSH connection and reconnect **using the new port 22222**. 
@@ -444,13 +440,13 @@ Make sure to follow this method during *Investigation 2* and *Investigation 3*.
     
     ***Remember, don't disconnect from your control terminal until you're sure you can reconnect!* Use as many test terminal windows as you need.**
 
-### Part 5: Using SSH Keypairs
+### Part 4: Using SSH Keypairs
 
 > **WARNING: Failure to follow the steps in Part 5 *properly and carefully* will result in losing access to your Linux VM.**
 >
 > If that happens, you’ll need to delete the VM and recreate it.
 
-In Part 5, you will generate an SSH keypair on your Linux VM, install them, and then copy your keys onto your personal computer to allow you to authenticate to your VM securely going forward when connecting.
+In Part 4, you will generate an SSH keypair on your Linux VM, install them, and then copy your keys onto your personal computer to allow you to authenticate to your VM securely going forward when connecting.
 
 #### Switching to SSH keypair authentication:
 
@@ -467,11 +463,11 @@ In Part 5, you will generate an SSH keypair on your Linux VM, install them, and 
     ssh-copy-id -p 22222 localhost
     ```
 
-1. Using FileZilla on your **personal computer**, log into the Linux VM and find your new public and private keys. They can be found on your Linux VM here:  
+1. Using `FileZilla Client` on your **personal computer**, log into your Linux VM and find your new public and private keys. They can be found on your Linux VM here:  
 
-    * **Private Key**: `~/.ssh/id_rsa`
+    * **Private Key**: `~/.ssh/id_ed25519`
 
-    * **Public Key**: `~/.ssh/id_rsa.pub`
+    * **Public Key**: `~/.ssh/id_ed25519.pub`
 
 1. Download these keys to your personal computer with FileZilla:
 
@@ -480,7 +476,7 @@ In Part 5, you will generate an SSH keypair on your Linux VM, install them, and 
     * **On macOS**, store the downloaded key here: `~/.ssh/`, then run the following commands in macOS Terminal:
 
         ```bash
-        chmod 700 ~/.ssh; chmod 600 ~/.ssh/id_rsa
+        chmod 700 ~/.ssh; chmod 600 ~/.ssh/id_ed25519
         ```
 
     ![Image: FileZilla - Port 22222](/img/filezilla-connect.png)
@@ -489,7 +485,7 @@ In Part 5, you will generate an SSH keypair on your Linux VM, install them, and 
 
     * Login the same way as before. **If you aren't asked for a password, then keypair authentication has succeeded.**
 
-1. Save both keys (`id_rsa` and `id_rsa.pub`) to secondary, portable location. This can be online storage like OneDrive or Dropbox, or to a USB drive. You will need your keys when you come to class to log in to your Linux VM going forward.
+1. Save both keys (`id_ed25519` and `id_ed25519.pub`) to secondary, portable location. This can be online storage like OneDrive or Dropbox, or to a USB drive. You will need your keys when you come to class to log in to your Linux VM going forward.
 
 #### Adding Your Professor's Public Key
 In this section, you will add your professor's public key to allow them to log in to your Linux VM and run lab checks and perform troubleshooting when needed.
@@ -526,16 +522,29 @@ In this section, you will add your professor's public key to allow them to log i
 
 
 1. Save and quit vim.
-1. Restart the sshd service:
+
+1. There's a second file that is *also* allowing password authentication. Open the file below and change it to say 'no' as well, just as you did above:
 
     ```bash
-    sudo systemctl restart sshd
+    sudo vim /etc/ssh/sshd_config.d/vim 50-cloud-init.conf
+    ```
+
+1. Load the new settings into **systemctl** memory:
+
+    ```bash
+    sudo systemctl daemon-reload
+    ```
+
+1. Restart the **ssh** service:
+
+    ```bash
+    sudo systemctl restart ssh
     ```
 
 1. Check the status of the service:
 
     ```bash
-    systemctl status -l sshd
+    systemctl status -l ssh
     ```
 
     * **If the status is in a *Failed* state, retrace your steps.** Look back at the SSHd config file for typos. Redo the last two steps to apply additional changes.
@@ -554,8 +563,9 @@ In this section, you will add your professor's public key to allow them to log i
 Although you have been double-checking your work (right?), you *might* have made some mistakes.
 
 For example:
-* Forgetting to enable `iptables`.
+* Forgetting to install `iptables-persistent`.
 * Missing a firewall rule.
+* Forgetting to save your firewall rules.
 * Forgetting to update Linux.
 
 To check for mistakes, a **shell script** has been created to check your work for you. 
@@ -576,16 +586,16 @@ Perform the following steps:
     * Re-run the checking script.
 1. If all checks pass (with the congratulations message), take a screenshot of the **full script output** (don't leave any text out or cut off). You'll need it for later.
 
-## Investigation 5: Updating Windows Server 2019
+## Investigation 5: Updating Windows Server 2022
 Updating your Windows Server VM in Azure is a little bit easier. It takes advantage of the cloud infrastructure to allow point-and-click updates.
 
 ### Part 1: Updating Windows with Artifacts
 
 1. Spin up your Windows Server VM, and wait until it's fully started up.
-1. In the Azure blade for your Windows Server VM, click on the **Manage artifacts** item in the menu bar to the left.
+1. In the Azure blade for your Windows Server VM, click on the **Artifacts** item in the menu bar to the left, within the **Operations** drop-down.
 1. In this new window, click on the **Apply artifacts** button. This will bring you to the *Add artifacts* screen.
 1. In the *Add artifacts* search field, type **Time**.
-1. Click on **Set Time Zone** in the results listing, then click **Add** in the next window.
+1. Click on **Set Time Zone** in the results listing, select *Eastern Standard Time* from the menu in the popup, then click **OK**.
 1. You'll be returned to the *Add artifacts* window.
 1. Add the following additional artifacts:
     1. Firefox
@@ -594,8 +604,8 @@ Updating your Windows Server VM in Azure is a little bit easier. It takes advant
 
     ![Image: Lab 2 - Windows Artifacts](/img/lab2-artifacts.jpeg)
 
-1. You'll be returned to the *Add artifacts* window. Simply click **OK** to install them.
-1. The *Manage Artifacts* window will return, and a new entry for each artifact will appear. Their statuses will cycle through *Pending*, *Installing*, and finally *Succeeded*.
+1. You'll be returned to the *Add artifacts* window with a list or artifacts waiting to be installed. Simply click **Install** to start the process them.
+1. The *Artifacts* window will return, and a new entry for each artifact will appear. (You may need to click on the *Refresh* button next to *Apply artifacts.) Their statuses will cycle through *Pending*, *Installing*, and finally *Succeeded*.
 1. When all artifacts are in a *Succeeded* state, move to the next part of the lab. (This may take 10-20 minutes.)
 
 ## Lab Submission
@@ -603,9 +613,9 @@ Updating your Windows Server VM in Azure is a little bit easier. It takes advant
 Submit to Blackboard **full-desktop** screenshots (PNG/JPG) of the following:
 1. Results of a successful run of `labcheck2.sh`.
 1. Logging in to your Linux VM without a password on port **22222**.
-1. Run the `yum update` command to show there are no further updates to install and screenshot the result.
-1. Service status of *firewalld* and *iptables*.
-1. Listing of your modified firewall rules.
+1. Run the `apt update && apt upgrade` command to show there are no further updates to install and screenshot the result.
+1. Service status of *netfiler-persistent*.
+1. Listing of your modified firewall rules: `sudo iptables -nvL --line`
 1. A full view of the contents of your **othertext.txt** file.
 1. A full view of the contents of **~/.ssh/authorized_keys**.
 1. Listing of your applied artifacts in Azure for your Windows Server VM.
