@@ -526,7 +526,7 @@ In this section, you will add your professor's public key to allow them to log i
 1. There's a second file that is *also* allowing password authentication. Open the file below and change it to say 'no' as well, just as you did above:
 
     ```bash
-    sudo vim /etc/ssh/sshd_config.d/vim 50-cloud-init.conf
+    sudo vim /etc/ssh/sshd_config.d/50-cloud-init.conf
     ```
 
 1. Load the new settings into **systemctl** memory:
