@@ -184,6 +184,18 @@ As we are going to run several admin-level commands, we will log in as root for 
     apt install iptables-persistent
     ```
 
+1. Turn off the *ufw* service still in memory:
+
+    ```bash
+    systemctl stop ufw
+    ```
+
+1. Check the status of the *ufw* service and ensure it can't be found and doesn't say **active**. (To exit systemctl status, hit *q* on your keyboard):
+
+    ```bash
+    systemctl status -l ufw
+    ```
+
 1. Check the status of the *iptables* service, which is called *netfilter-persistent*. It should tell you it's **active** and **enabled**: 
 
     ```bash
