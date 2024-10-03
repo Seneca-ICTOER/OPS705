@@ -109,7 +109,7 @@ Finally, let's modify the main page. Currently, it's displaying the default Apac
     ```
 
 1. Save and quit the vim session.
-1. In your **local** browser, refresh the page. If your changes show up, you're done!
+1. In your **local** browser, refresh the page. If your changes show up, you're done! (You may need to refresh a few times to force your browswer to overwrite local cache and see your changes.)
 
 ## Investigation 2: Setting Up A Web Server on Windows Server 2022
 Setting up an Internet Information Services web server on an Azure VM is incredibly easy, especially in contrast to the Apache setup.
