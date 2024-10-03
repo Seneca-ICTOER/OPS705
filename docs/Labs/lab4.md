@@ -74,8 +74,20 @@ In this section, you will follow security best practices to allow web server tra
 Finally, let's modify the main page. Currently, it's displaying the default Apache splash page. Let's change that.
 
 1. Navigate to: `/var/www/html`
-1. List all files in this directory. There are none; this is expected.
-1. In this location, elevate to root privileges and open a new vim session to: `index.html`
+1. List all files in this directory. There should be one: `index.html`
+1. Elevate to root and go back into this location: `/var/www/html/`
+1. Rename the current `index.html` to keep it as a backup:
+
+    ```bash
+    mv index.html apache_default.backup
+    ```
+
+1. Now, create a new index.html by opening a new vim session to it:
+
+    ```bash
+    vim index.html
+    ```
+1. This file should be empty. If not, revisit Step 4.
 1. Using HTML, give it a title of: **OPS705 Linux Server - Fall 2024**.
 1. Using HTML, add to the body: **Name: yourname**
 1. Using HTML, add to the body as a new line: **Student Username: yourstudentusername**
