@@ -138,8 +138,6 @@ Setting up an Internet Information Services web server on an Azure VM is incredi
 
 ## Investigation 3: Routing Through Your Linux Server
 In this investigation, you'll set up your Linux Server VM to forward requests to your Windows VM's IIS web server. This is an advanced topic. Reviewing the Week 5 material is highly recommended. The following investigation assumes you understand the concepts discussed in those lectures.
-
-This is what we're aiming for:
     ![Image: Public+Private Networking - Routing and NAT](/img/nat-networking.png)
 
 ### Part 1: Enabling System-Level Forwarding on Your Linux Server
