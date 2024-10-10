@@ -165,7 +165,7 @@ During Wordpress setup, after the database connection page, use the following va
 
 
 ## WordPress Blog
-Customize your blog by choosing a different **theme** from the default. Choose a *WordPress.org* theme from the menu.
+**Customize your blog by choosing a different *theme* from the default. Choose a *WordPress.org* theme from the menu.**
 
 Create three blog entries of the following topics:
 1. Have you ever installed services like this outside of OPS705? If so, elaborate.
@@ -176,19 +176,23 @@ Create three blog entries of the following topics:
 Once you've finished setting up your WordPress blog, you must lock down your Ubuntu firewall.
 
 Requirements:
-1. Must use iptables, not ufw.
-1. Only the following INPUT traffic is allowed:
+1. **Must use *iptables***, not *ufw*.
+1. **Only the following INPUT traffic is allowed:**
     1. RELATED,ESTABLISHED
     1. LOOPBACK/ALL
     1. SSH *(on modified port)*
     1. HTTP
+    1. DNS
+    1. DHCP
+    1. Azure infrastructure
     1. Default policy for INPUT and FORWARD must be set to DROP
+1. **The Wordpress blog page must load automatically when the VM is started up, at the FDQN of that VM.**
 
 ## Lab Submission 
 As with previous labs, your work will be evaluated by accessing your site directly. 
 
 To formally submit, you must include the following:
 
-1. In the comment section of your submission, paste the URL of your new site.
+1. In the comment section of your submission, paste the URL (FQDN) of your new site.
 
 **Reminder:** Once submitted, please shutdown your VM.
