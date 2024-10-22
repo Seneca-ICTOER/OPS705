@@ -144,7 +144,7 @@ Setting up an Internet Information Services web server on an Azure VM is incredi
 1. In the *Actions* menu column on the right, click **Explore**. This will open a new folder where your IIS web pages are stored.
     ![Image: IIS Explore Dialog](/img/iis-explore.png)
 1. Right-click anywhere in that window, click **New > Text Document**. Name it **index.html**. Save it with double-quotes to make sure it's saved as an HTML file, not text. `"index.html"`
-1. Open the text file, and write the same HTML code as Investigation 1, changing the title tag to: **OPS705 IIS Web Server - Fall 2024**.
+1. Open the text file, and write the same HTML code as Investigation 1, changing the title tag and body text to: **OPS705 IIS Web Server - Fall 2024**.
 1. Refresh your browser page from *Part 1*: `http://localhost` You should see your new code.
 1. On your **local computer**, open a browser and navigate to the URL you used to remotely connect to your Windows Server VM. Unlike the Linux Server in Lab 3, the web page you created does not appear. We still have some work to do.
 
