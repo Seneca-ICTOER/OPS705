@@ -90,11 +90,14 @@ Create a new RDS instance with the following settings:
 1. Engine type: **MySQL**
 1. Engine Version: **MySQL 8.0.32** (or current latest version available)
 1. Templates: **Free tier**
+1. Availability and durability: **Single DB instance**
 1. DB instance identifier: **wordpress-db**
 1. Master username: **admin**
+1. Credentials management: **Self managed**
 1. Auto generate a password: **Checked**
-1. DB instance class: **db.t3.micro**
-1. Allocated storage: **5**
+1. DB instance class: **db.t4g.micro**
+1. Storage type: **General Purpose SSD (gp2)**
+1. Allocated storage: **20**
 1. Enable storage autoscaling: **Unchecked**
 1. Virtual private cloud (VPC): **Wordpress VPC**
 1. DB subnet group: **Create new DB Subnet Group** (if you're redoing your database creation, there will already be an entry here. Make sure you're using the *Wordpress VPC* in the setting above!)
@@ -147,6 +150,7 @@ We use **environment variables** to allow us to put all the info in the Elastic 
 In this file (wp-config.php), you will be adding database connector information as ***environment variables***, not the actual connector information. (We'll add that information later.)
 
 Find the following lines and add the bolded values:
+
 1. define('DB_NAME', **getenv('DB_NAME')**);
 1. define('DB_USER', **getenv('DB_USER')**);
 1. define('DB_PASSWORD', **getenv('DB_PASSWORD')**);
@@ -155,15 +159,17 @@ Find the following lines and add the bolded values:
 #### Adding Authentication Unique Keys and Salts as Environment Variables
 In the same file (wp-config.php), you'll be adding the authentication keys and salts as ***environment variables***.
 
-Find the following lines and add the bolded values:
-1. define('AUTH_KEY', **getenv('AUTH_KEY')**);
-1. define('SECURE_AUTH_KEY', **getenv('SECURE_AUTH_KEY')**);
-1. define('LOGGED_IN_KEY', **getenv('LOGGED_IN_KEY')**);
-1. define('NONCE_KEY', **getenv('NONCE_KEY')**);
-1. define('AUTH_SALT', **getenv('AUTH_SALT')**);
-1. define('SECURE_AUTH_SALT', **getenv('SECURE_AUTH_SALT')**);
-1. define('LOGGED_IN_SALT', **getenv('LOGGED_IN_SALT')**);
-1. define('NONCE_SALT', **getenv('NONCE_SALT')**);
+Find the following lines and replace:
+```php
+define('AUTH_KEY', getenv('AUTH_KEY'));
+define('SECURE_AUTH_KEY', getenv('SECURE_AUTH_KEY'));
+define('LOGGED_IN_KEY', getenv('LOGGED_IN_KEY'));
+define('NONCE_KEY', getenv('NONCE_KEY'));
+define('AUTH_SALT', getenv('AUTH_SALT'));
+define('SECURE_AUTH_SALT', getenv('SECURE_AUTH_SALT'));
+define('LOGGED_IN_SALT', getenv('LOGGED_IN_SALT'));
+define('NONCE_SALT', getenv('NONCE_SALT'));
+```
 
 ![Image: Adding database connector information to wp-config.php.](/img/a2_wp-config-example.png)
 *Figure 1: Adding database connector information to wp-config.php.*
@@ -171,7 +177,7 @@ Find the following lines and add the bolded values:
 ### Zip As New File and Rename - Local Computer
 1. Find the **wordpress** folder on your local computer.
 1. *Zip the entire wordpress directory*, not just the files inside. (Use the zip compression protocol. Don't use something else like .rar.)
-1. Rename your new zip file: **wordpress-6.2-*modded*.zip** (Use whatever version the source zip file has.)
+1. Rename your new zip file: **wordpress-6.7.1-*modded*.zip** (Use whatever version the source zip file has.)
 
 ## Task 4: Elastic Beanstalk
 Create a new Elastic Beanstalk application with the following settings:
@@ -183,73 +189,103 @@ Select: **Web server environment**
 1. Application name: **wordpress**
 1. Environment name: **Wordpress-env**
 1. Platform: **PHP**
-1. Platform branch: **PHP 8.1** (or current latest)
+1. Platform branch: **PHP 8.3** (or current latest)
 1. Application code: **Upload your code**
-1. Choose file: **wordpress-6.2-*modded*.zip** (From your local computer)
-1. Version label: **wordpress-6.2** (Use the version from your zip filename)
+1. Choose file: **wordpress-6.7.1-*modded*.zip** (From your local computer)
+1. Version label: **wordpress-6.7.1** (Use the version from your zip filename)
+1. Presets: **Single instance** (free tier eligible
 
+Click next.
 
-### Configure more options
+### Configure service access
+1. Service role: **Use an existing service role**
+1. Existing service roles: **LabRole**
+1. EC2 key pair: **vockey**
+1. EC2 instance profile: **LabInstanceProfile**
 
-#### Software
+Click next.
+
+### Set up networking, database, and tags
+
+#### Virtual Private Cloud (VPC)
+1. VPC: **Wordpress VPC**
+
+#### Instance Settings
+1. Public IP address - Activated: **Checked**
+1. Instance subnets: **Public Subnet 1, Public Subnet 2** (both checked)
+1. Database subnets: **Private Subnet 1, Private Subnet 2** (both checked)
+
+Click next.
+
+### Configure instance traffic and scaling
+
+#### Instances
+Leave all defaults as is, except the following:
+1. EC2 security groups: **Wordpress Website SG**
+
+Click next.
+
+### Configure updates, monitoring, and logging
+
+#### Monitoring
+1. System: **Basic**
+
+#### Managed platform updates
+1. Activated: **Unchecked**
+
+#### Notifications
+1. Email: ***YourSenecaE-mailAddress***
+
+#### Platform software
+
 Before beginning this section, you will need two things:
 1. Your database connector information (you saved this, right?)
 1. Randomly generated auth keys and salts from here: https://api.wordpress.org/secret-key/1.1/salt/ (it's a good idea to save these in a text file, too)
 
-##### Settings:
+#### Container Options
 1. Document root: **/wordpress**
-1. Environment properties
-    1. DB_HOST: ***your RDS database URL***
-    1. DB_NAME: ***initial database name***
-    1. DB_USER: **admin**
-    1. DB_PASSWORD: ***your auto-generated database password***
-    1. AUTH_KEY: **(use gathered info from salt page)**
-    1. SECURE_AUTH_KEY: **(use gathered info from salt page)**
-    1. LOGGED_IN_KEY: **(use gathered info from salt page)**
-    1. NONCE_KEY: **(use gathered info from salt page)**
-    1. AUTH_SALT: **(use gathered info from salt page)**
-    1. SECURE_AUTH_SALT: **(use gathered info from salt page)**
-    1. LOGGED_IN_SALT: **(use gathered info from salt page)**
-    1. NONCE_SALT: **(use gathered info from salt page)**
+
+#### Environment properties
+
+Click on *Add environment property*:
+
+| Name     | Value     |
+| ------------- | ------------- |
+| DB_HOST | ***your RDS database URL*** |
+| DB_NAME | ***initial database name*** |
+| DB_USER | **admin** |
+| DB_PASSWORD | ***your auto-generated database password*** |
+| AUTH_KEY | **(use gathered info from salt page)** |
+| SECURE_AUTH_KEY | **(use gathered info from salt page)** |
+| LOGGED_IN_KEY | **(use gathered info from salt page)** |
+| NONCE_KEY | **(use gathered info from salt page)** |
+| AUTH_SALT | **(use gathered info from salt page)** |
+| SECURE_AUTH_SALT | **(use gathered info from salt page)** |
+| LOGGED_IN_SALT | **(use gathered info from salt page)** |
+| NONCE_SALT | **(use gathered info from salt page)** |
 
 Hint: None of these values should have single quotes in them. (i.e. ')
 
 ![Image: Adding database connector information, auth keys and salts to your Elastic Beanstalk application as static Environment Variables.](/img/a2_beanstalk-environment-variables-example.png)
 *Figure 2: Adding database connector information, auth keys and salts to your Elastic Beanstalk application as static **Environment Variables**.*
 
-#### Security
-1. Service role: **LabRole**
-1. EC2 key pair: **vockey**
-1. IAM instance profile: **LabInstanceProfile**
+Click next.
 
-#### Monitoring
-1. System: **Basic**
+### Review
+Review all settings and ensure they match the instructions above. Once you hit **Submit**, the application will take several minutes to create itself.
 
-#### Managed updates
-1. Enabled: **Unchecked**
+Click **Submit** when ready.
 
-#### Notifications
-1. Email: ***YourSenecaE-mailAddress***
+### Creating the application.
 
-#### Network
-1. VPC: **Wordpress VPC**
-1. Public IP address: **Checked**
-1. Instance subnets: **Public Subnet 1, Public Subnet 2** (both checked)
-1. Database subnets: **Private Subnet 1, Private Subnet 2** (both checked)
-
-#### Instances
-1. EC2 Security Groups: **Wordpress Website SG** (both checked)
-
-### Create the application.
-
-While you wait for the creation to complete, check your e-mail to confirm your notification subscription.
+While you wait for the creation to complete, check your e-mail to confirm your notification subscription to this instance.
 
 ## Task 5: Site Configuration
 Open the URL presented in the Wordpress EBS instance and begin the site setup.
 
 ### Site Information
 Set the following site information:
-1. Site Title: **OPS705 Fall 2023 A2 - *Full Name***
+1. Site Title: **OPS705 Fall 2024 A2 - *Full Name***
 1. Username: ***yourSenecaUsername***
 1. Password: **Choose a strong password** (do not reuse the DB password!)
 1. Your Email: ***yourSenecaEmailAddress***
