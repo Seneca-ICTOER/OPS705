@@ -221,7 +221,7 @@ Click next.
 
 #### Instances
 Leave all defaults as is, except the following:
-1. EC2 security groups: **Wordpress Website SG**
+1. EC2 security groups: **Wordpress Website SG**, **Wordpress Database SG**
 
 Click next.
 
