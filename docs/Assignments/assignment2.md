@@ -125,7 +125,7 @@ Store the following connection information about your RDS instance in a saved do
 
 From your work with Wordpress in Assignment 1, you know you can simply upload the source code and the first time you load the webpage, you'll be asked for database connector information.
 
-However, Elastic Beanstalk applications are meant to be disposable.
+However, ***Elastic Beanstalk*** applications are meant to be disposable.
 
 In A1, when you were adding that database connector info, it was being saved in a file called *wp-config.php* on the webserver VM. This is fine for that kind of setup, but ***in Elastic Beanstalk, changes made to static HTML or PHP are not saved if the Beanstalk application restarts***, which it will do often. Whenever the application restarts, it will reload from the source zip file and the original, empty connector file. If you did as in A1, you'd have to constantly re-enter your DB connector info every time you started up your Learner Lab environment.
 
