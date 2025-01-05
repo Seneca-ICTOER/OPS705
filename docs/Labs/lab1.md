@@ -45,16 +45,16 @@ Logging in after initial setup is quite easy.
 In this investigation, you'll create, configure, and manage a Windows Server 2022 Virtual Machine using Microsoft Azure and a pre-built image. This means no tedious and time-consuming Windows installation! You'll also login to the VM remotely, using Microsoft's Remote Desktop Protocol to share its desktop.
 
 ### Part 1: Creating A Windows VM From An Image
-To create your Windows Server 2022 Virtual machine, perform the following steps:
+To create your Windows Server 2024 Virtual machine, perform the following steps:
 1. Navigate to *DevTest Labs > OPS705 > My virtual machines*
 1. Click the **+ Add** button.
 1. Wait for the *Choose a base* listing to populate. This may take a few moments.
-1. Select the item titled **Windows Server 2022 Datacenter**. Be careful here! There are many other options.
+1. Select the item titled **Windows Server 2024 Datacenter**. Be careful here! There are many other options.
 1. A new blade, *Create lab resource* appears.
 
     ![Image: Azure - Create Lab Resource](/img/azure-vm-labresource.png)
 
-1. In the *Virtual machine name* field, type: **yourSenecaUsername-win** (you only have 15 characters, you may need to abbreviate)
+1. In the *Virtual machine name* field, type: **az-win##** (you have been assigned a 2-digit UID, found in gradebook. Use that. Example: az-win01)
 1. *Username:* **yourSenecaUsername**
 1. *Use a saved secret:* Unchecked
 1. *Password*: Your choice, but use the same for all VMs and resources in this course.
@@ -102,7 +102,7 @@ In this investigation, we'll create, configure, and manage an Ubuntu Server Virt
 To create your Ubuntu VM, follow the steps from *Investigation 2, Part 1*, but with the following settings:
 
 1. **Choose a base:** Ubuntu Server 24.04 LTS
-1. **Virtual machine name:** yourSenecaUsername-lnx
+1. **Virtual machine name:** az-lnx## (Use 2-digit UID)
 1. **User name:** yourSenecaUsername
 1. **Authentication type:** Password
 1. **Use a saved secret:** Unchecked
@@ -133,7 +133,7 @@ In the *Overview* tab for the Virtual Machine created in Part 1, look for the **
     ssh yourSenecaUsername@address
     ```
 1. When prompted for a password, use the one you gave when you created the VM. (You won't see anything as you type here; that's normal.)
-1. If login is successful, you should see a prompt like this: `[cjohnson30@cjohnson30-lnx ~]$`
+1. If login is successful, you should see a prompt like this: `[cjohnson30@az-lnx01 ~]$`
 1. To prove you've completed this section, run the following command:
 
     ```bash

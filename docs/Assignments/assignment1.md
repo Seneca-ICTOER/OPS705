@@ -34,7 +34,7 @@ This is what you'll need to get Wordpress working.
 ## Azure Linux VM Configuration
 Create a new, third Ubuntu Linux VM with the following specifications:
 
-1. **Virtual machine name:** assign1-username
+1. **Virtual machine name:** assign1-##
 1. **Virtual machine size:** Standard_B1s
 1. **IP address:** Public
 
