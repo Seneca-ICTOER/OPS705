@@ -41,15 +41,15 @@ Logging in after initial setup is quite easy.
 1. Complete 2FA authentication.
 1. Our classroom DevTest Lab will be in your recent list, or you can use the search bar to bring up DevTest Labs by looking for **OPS705**. (*DO NOT search for *Virtual Machines* in the search bar.* You will find yourself in the wrong area and things will not work.)
 
-## Investigation 2: Managing a Windows Server 2022 VM in Azure
+## Investigation 2: Managing a Windows Server 2025 VM in Azure
 In this investigation, you'll create, configure, and manage a Windows Server 2022 Virtual Machine using Microsoft Azure and a pre-built image. This means no tedious and time-consuming Windows installation! You'll also login to the VM remotely, using Microsoft's Remote Desktop Protocol to share its desktop.
 
 ### Part 1: Creating A Windows VM From An Image
-To create your Windows Server 2024 Virtual machine, perform the following steps:
+To create your Windows Server 2025 Virtual machine, perform the following steps:
 1. Navigate to *DevTest Labs > OPS705 > My virtual machines*
 1. Click the **+ Add** button.
 1. Wait for the *Choose a base* listing to populate. This may take a few moments.
-1. Select the item titled **Windows Server 2024 Datacenter**. Be careful here! There are many other options.
+1. Select the item titled **Windows Server 2025 Datacenter**. Be careful here! There are many other options.
 1. A new blade, *Create lab resource* appears.
 
     ![Image: Azure - Create Lab Resource](/img/azure-vm-labresource.png)
