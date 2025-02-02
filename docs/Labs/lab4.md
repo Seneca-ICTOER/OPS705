@@ -88,7 +88,7 @@ Finally, let's modify the main page. Currently, it's displaying the default Apac
     vim index.html
     ```
 1. This file should be empty. If not, revisit Step 4.
-1. Using HTML, give it a title of: **OPS705 Linux Server - Fall 2024**.
+1. Using HTML, give it a title of: **OPS705 Linux Server - Winter 2025**.
 1. Using HTML, add to the body: **Name: yourname**
 1. Using HTML, add to the body as a new line: **Student Username: yourstudentusername**
 1. Here's how that basic HTML code looks like: 
@@ -97,11 +97,11 @@ Finally, let's modify the main page. Currently, it's displaying the default Apac
     <html>
       <head>
         <title>
-          OPS705 Linux Server - Fall 2024
+          OPS705 Linux Server - Winter 2025
         </title>
       </head>
       <body>
-        <b>OPS705 Linux Server - Fall 2024</b>
+        <b>OPS705 Linux Server - Winter 2025/b>
         <p>Name: <b>insertyourfullname</b></p>
         <br>Username: <b>yourstudentusername</b></br>
       </body>
@@ -111,7 +111,7 @@ Finally, let's modify the main page. Currently, it's displaying the default Apac
 1. Save and quit the vim session.
 1. In your **local** browser, refresh the page. If your changes show up, you're done! (You may need to refresh a few times to force your browswer to overwrite local cache and see your changes.)
 
-## Investigation 2: Setting Up A Web Server on Windows Server 2022
+## Investigation 2: Setting Up A Web Server on Windows Server 2025
 Setting up an Internet Information Services web server on an Azure VM is incredibly easy, especially in contrast to the Apache setup.
 
 ### Part 1: Installing and Verifying the IIS Web Server
@@ -237,7 +237,7 @@ In this investigation, you'll set up your Linux Server VM to forward requests to
     ```
 1. In a browser on your **local computer**, paste the URL for your Linux VM, adding **:8080** to the end of the address, then hit Enter. (Make sure you aren't using https!)
 
-    ***Example: http://cjohnson30-lnx.eastus.cloudapp.azure.com:8080***
+    ***Example: http://az-lnx01.eastus.cloudapp.azure.com:8080***
 1. If you've done your work right, the Windows IIS web page should appear!
 1. Review the packet count from your `watch` command in Step 5. Notice the new forward rules are working! Keep this in mind for troubleshooting.
 1. In your SSH session, use the keyboard combination **Ctrl** and **c** to halt the watch program.
