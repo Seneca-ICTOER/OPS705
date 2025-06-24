@@ -1,6 +1,6 @@
 ---
 id: assignment1
-title: Assignment 1
+title: Assignment 1 - Installing WordPress On A VM
 sidebar_position: 1
 description: Assignment 1 - Installing WordPress On A VM
 ---

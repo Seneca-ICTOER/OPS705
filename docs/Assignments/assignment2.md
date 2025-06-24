@@ -1,6 +1,6 @@
 ---
 id: assignment2
-title: Assignment 2
+title: Assignment 2 - Installing WordPress in AWS (PaaS)
 sidebar_position: 2
 description: Assignment 2 - Installing WordPress in AWS (PaaS)
 ---
