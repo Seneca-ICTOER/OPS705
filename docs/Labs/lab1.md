@@ -1,11 +1,11 @@
 ---
 id: lab1
-title: Azure Lab 1
+title: Lab 1 - Creating Virtual Machines in Azure
 sidebar_position: 1
-description: Azure Lab 1 - Creating Virtual Machines in Azure
+description: Lab 1 - Creating Virtual Machines in Azure
 ---
 
-# Azure Lab 1: Creating Virtual Machines in Azure
+# Lab 1: Creating Virtual Machines in Azure
 
 ## Lab Preparation
 

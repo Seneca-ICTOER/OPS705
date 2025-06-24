@@ -1,11 +1,11 @@
 ---
 id: lab4
-title: Azure Lab 4
+title: Lab 4 - Setting Up a Multi-VM Application Server Environment
 sidebar_position: 4
-description: Azure Lab 4 - Setting Up a Multi-VM Application Server Environment
+description: Lab 4 - Setting Up a Multi-VM Application Server Environment
 ---
 
-# Azure Lab 4: Setting Up a Multi-VM Application Server Environment
+# Lab 4: Setting Up a Multi-VM Application Server Environment
 
 ## Lab Preparation
 
